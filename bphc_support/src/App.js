@@ -1,7 +1,9 @@
 import Login from "./components/Auth/Login";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ForgotPassword from "./components/Auth/ForgotPassword";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
+import Main from "./components/Page/Main";
+
 function App() {
   return (
     <div className="App">
@@ -15,6 +17,7 @@ function App() {
           </Route>
           <Route path="/">
             <Header />
+            <Main/>
           </Route>
         </Switch>
       </Router>
