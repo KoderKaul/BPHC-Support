@@ -1,7 +1,8 @@
 import React from "react";
 import { Button, makeStyles } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
-import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
+import VpnKeyRoundedIcon from '@material-ui/icons/VpnKeyRounded';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   links: {
-    color: "white",
+    color: theme.palette.primary.main,
   },
 }));
 
@@ -21,10 +22,10 @@ function SignOutLinks() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Button component={NavLink} to="/" className={classes.links}>
+      <Button component={NavLink} to="/account" className={classes.links}>
         ACCOUNT
       </Button>
-      <Button component={NavLink} to="/login" className={classes.links}>
+      <Button component={NavLink} to="/login" className={classes.links} startIcon={<VpnKeyRoundedIcon/>}>
         LOGIN
       </Button>
     </div>
