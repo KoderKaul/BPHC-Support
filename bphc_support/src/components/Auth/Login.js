@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import signin from "./signin.svg";
-import googleicon from "./google-icon.svg";
+import googleicon from "../../img/google-icon.svg";
 import { GoogleLogin } from "react-google-login";
 
 const useStyles = makeStyles((theme) => ({
@@ -57,6 +57,9 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: "20px",
     margin: "0 10px",
   },
+  left:{
+      padding: "50px 50px"
+  }
 }));
 
 function Login() {
@@ -68,7 +71,7 @@ function Login() {
 
   return (
     <Grid container>
-      <Grid item xs={6}>
+      <Grid item xs={6} className={classes.left}>
         <img src={signin} className={classes.signin} />
       </Grid>
       <CssBaseline />

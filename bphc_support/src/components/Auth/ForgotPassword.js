@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import forgotpassword from "./forgotpassword.svg";
+import forgotpassword from "../../img/forgotpassword.svg";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     marginTop: theme.spacing(14),
-    height: "60vh",
+    height: "50vh",
   },
   left: {
-    paddingLeft: "5vw",
+    padding: "100px"
   },
 }));
 
