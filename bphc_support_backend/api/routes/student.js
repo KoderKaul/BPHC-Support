@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const jwt = require("jsonwebtoken");
 const checkAuth = require('../middleware/check-auth');
+const mongoSanitize = require('express-mongo-sanitize');
+router.use(mongoSanitize());
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -35,7 +37,7 @@ const Student = require("../models/student");
 
 router.post('/signup', upload.single('studentImage'),(req, res, next) => {
 
-    Student.find({email: req.body.email.toString()})
+    Student.find({email: req.body.email})
     .exec()
     .then(docs =>
         {
@@ -89,7 +91,7 @@ router.post('/login', (req, res, next) => {
   
   const email = req.body.email;
 
-  Student.find({email: email.toString()})
+  Student.find({email: email})
   .exec()
   .then(doc =>{
     if(doc.length>0)

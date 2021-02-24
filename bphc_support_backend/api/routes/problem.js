@@ -3,6 +3,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const jwt = require("jsonwebtoken");
 const checkAuth = require('../middleware/check-auth');
+const mongoSanitize = require('express-mongo-sanitize');
+router.use(mongoSanitize());
 
 
 const Problem = require("../models/problem");
@@ -58,7 +60,7 @@ router.get('/user',checkAuth, (req, res,next) => {
   
   const email = req.body.email;
 
-  Problem.find({studentEmail: email.toString()})
+  Problem.find({studentEmail: email})
   .exec()
   .then(doc =>{
     res.status(200).json(doc);
@@ -75,7 +77,7 @@ router.get('/admin', checkAuth, (req, res,next) => {
   
     const bhawan = req.body.bhawan;
   
-    Problem.find({bhawan: bhawan.toString()})
+    Problem.find({bhawan: bhawan})
     .exec()
     .then(doc =>{
       res.status(200).json(doc);

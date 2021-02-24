@@ -1,15 +1,17 @@
-import express from "express";
+const express = require("express");
 const app = express();
-import morgan from "morgan";
-import { urlencoded, json } from "body-parser";
-import { connect } from "mongoose";
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const mongoSanitize = require('express-mongo-sanitize');
 
 
 app.use(morgan('dev'));
-app.use(urlencoded({extended: true}));
-app.use(json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(mongoSanitize()); 
 
-connect(
+mongoose.connect(
     "mongodb+srv://vatsu:"
     +process.env.MONGO_ATLAS_PW
     +"@cluster0.u46ll.mongodb.net/"
@@ -36,9 +38,9 @@ app.use((req, res, next) => {
 
 
 
-import studentRoutes from "./api/routes/student";
-import adminRoutes from "./api/routes/admin";
-import problemRoutes from "./api/routes/problem";
+const studentRoutes = require("./api/routes/student");
+const adminRoutes = require("./api/routes/admin");
+const problemRoutes = require("./api/routes/problem");
 
 app.use('/student',studentRoutes);
 app.use('/admin',adminRoutes);
@@ -54,4 +56,4 @@ app.use('/problem',problemRoutes);
 
 
 
-export default app;
+module.exports = app;
