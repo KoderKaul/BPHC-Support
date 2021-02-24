@@ -35,7 +35,7 @@ const Admin = require("../models/admin");
 
 router.post('/signup', upload.single('adminImage'),(req, res, next) => {
 
-    Admin.find({email: req.body.email})
+    Admin.find({email: req.body.email.toString()})
     .exec()
     .then(docs =>
         {
@@ -87,7 +87,7 @@ router.post('/login', (req, res, next) => {
   
   const email = req.body.email;
 
-  Admin.find({email: email})
+  Admin.find({email: email.toString()})
   .exec()
   .then(doc =>{
     if(doc.length>0)
