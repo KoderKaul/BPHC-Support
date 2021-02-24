@@ -91,7 +91,7 @@ router.post('/signup', upload.single('studentImage'),(req, res, next) => {
 });
 
 
-router.post('/login', (req, res, next) => {
+router.post('/login', (req, response, next) => {
   
   const email = req.body.email;
 
@@ -109,14 +109,14 @@ router.post('/login', (req, res, next) => {
           expiresIn: "2h"
         }
       );
-      res.status(200).json(
+      response.status(200).json(
         {
           message: "Auth success",
           token: token
         }
       );
     } else {
-      res.status(404).json(
+      response.status(404).json(
         {
           message: "auth failed"
         }
