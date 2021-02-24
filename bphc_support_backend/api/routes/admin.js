@@ -20,7 +20,8 @@ const fileFilter = (req, file, cb) => {
   // reject a file
   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
     cb(null, true);
-  } else {
+  } 
+  else {
     cb(null, false);
   }
 };
@@ -78,10 +79,6 @@ router.post('/signup', upload.single('adminImage'),(req, res, next) => {
             console.log(err);
         }
         );
-    
-    
-
-
 });
 
 
