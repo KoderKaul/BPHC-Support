@@ -1,6 +1,6 @@
 import React from "react";
 import bphc from "../../img/inside-bphc.jpg";
-import { makeStyles, Grid, Grow, Container, Paper } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   main: {
     position: "relative",

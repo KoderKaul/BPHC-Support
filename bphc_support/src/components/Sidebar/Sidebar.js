@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, Grid,Divider } from "@material-ui/core";
+import { makeStyles, Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { NavLink } from "react-router-dom";
 import SidebarOptions from "./SidebarOptions";

@@ -2,21 +2,11 @@ import React from "react";
 import {
   AppBar,
   Toolbar,
-  makeStyles,
   Grid,
-  IconButton,
 } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import bitslogo from "../../img/bitslogo.png";
-import { NavLink } from "react-router-dom";
 import SignOutLinks from "./SignOutLinks";
 
-const useStyles = makeStyles((theme) => ({
-  
-}));
-
 function Header() {
-  const classes = useStyles();
   return (
     <div>
       <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none'}}>
