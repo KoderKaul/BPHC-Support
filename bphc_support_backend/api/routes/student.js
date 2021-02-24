@@ -5,15 +5,18 @@ const multer = require('multer');
 const jwt = require("jsonwebtoken");
 const checkAuth = require('../middleware/check-auth');
 const mongoSanitize = require('express-mongo-sanitize');
+
 router.use(mongoSanitize());
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, './uploads/');
   },
+  
   filename: function(req, file, cb) {
     cb(null, Date.now() + file.originalname);
   }
+  
 });
 
 const fileFilter = (req, file, cb) => {
