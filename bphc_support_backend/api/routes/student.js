@@ -35,7 +35,7 @@ const Student = require("../models/student");
 
 router.post('/signup', upload.single('studentImage'),(req, res, next) => {
 
-    Student.find({email: req.body.email})
+    Student.find({email: req.body.email.toString()})
     .exec()
     .then(docs =>
         {
@@ -89,7 +89,7 @@ router.post('/login', (req, res, next) => {
   
   const email = req.body.email;
 
-  Student.find({email: email})
+  Student.find({email: email.toString()})
   .exec()
   .then(doc =>{
     if(doc.length>0)

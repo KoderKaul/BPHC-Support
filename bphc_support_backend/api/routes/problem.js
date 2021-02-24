@@ -58,7 +58,7 @@ router.get('/user',checkAuth, (req, res,next) => {
   
   const email = req.body.email;
 
-  Problem.find({studentEmail: email})
+  Problem.find({studentEmail: email.toString()})
   .exec()
   .then(doc =>{
     res.status(200).json(doc);
@@ -75,7 +75,7 @@ router.get('/admin', checkAuth, (req, res,next) => {
   
     const bhawan = req.body.bhawan;
   
-    Problem.find({bhawan: bhawan})
+    Problem.find({bhawan: bhawan.toString()})
     .exec()
     .then(doc =>{
       res.status(200).json(doc);
