@@ -1,0 +1,7 @@
+{
+    "env":{
+        "MONGO_ATLAS_PW": "vatsu",
+        "MONGO_ATLAS_DB": "vatsu",
+        "JWT_KEY": "secret"
+    }
+}
