@@ -65,10 +65,11 @@ const useStyles = makeStyles((theme) => ({
 function Login() {
   const classes = useStyles();
 
-  const [email,setEmail] = useState("");
   const [password, setPassword] = useState("")
+  const [email,setEmail] = useState("");
 
   const submitForm = () => {
+
   }
 
   const responseGoogle = (response) => {
