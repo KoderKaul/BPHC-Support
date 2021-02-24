@@ -5,6 +5,7 @@ const multer = require('multer');
 const jwt = require("jsonwebtoken");
 const checkAuth = require('../middleware/check-auth');
 const mongoSanitize = require('express-mongo-sanitize');
+
 router.use(mongoSanitize());
 
 const storage = multer.diskStorage({
@@ -21,6 +22,7 @@ const fileFilter = (req, file, cb) => {
   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
     cb(null, true);
   } 
+  
   else {
     cb(null, false);
   }
