@@ -1,12 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const multer = require('multer');
-const jwt = require("jsonwebtoken");
 const checkAuth = require('../middleware/check-auth');
 const mongoSanitize = require('express-mongo-sanitize');
+const multer = require('multer');
+const jwt = require("jsonwebtoken");
 
 router.use(mongoSanitize());
+
+const fileFilter = (req, file, cb) => {
+  // reject a file
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -19,14 +28,6 @@ const storage = multer.diskStorage({
   
 });
 
-const fileFilter = (req, file, cb) => {
-  // reject a file
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
 
 const upload = multer({
   storage: storage,
