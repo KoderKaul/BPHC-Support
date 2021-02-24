@@ -1,15 +1,15 @@
-const express = require("express");
+import express from "express";
 const app = express();
-const morgan = require("morgan");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+import morgan from "morgan";
+import { urlencoded, json } from "body-parser";
+import { connect } from "mongoose";
 
 
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use(urlencoded({extended: true}));
+app.use(json());
 
-mongoose.connect(
+connect(
     "mongodb+srv://vatsu:"
     +process.env.MONGO_ATLAS_PW
     +"@cluster0.u46ll.mongodb.net/"
@@ -36,9 +36,9 @@ app.use((req, res, next) => {
 
 
 
-const studentRoutes = require("./api/routes/student");
-const adminRoutes = require("./api/routes/admin");
-const problemRoutes = require("./api/routes/problem");
+import studentRoutes from "./api/routes/student";
+import adminRoutes from "./api/routes/admin";
+import problemRoutes from "./api/routes/problem";
 
 app.use('/student',studentRoutes);
 app.use('/admin',adminRoutes);
@@ -54,4 +54,4 @@ app.use('/problem',problemRoutes);
 
 
 
-module.exports = app;
+export default app;

@@ -7,10 +7,10 @@ import { makeStyles, Grid } from "@material-ui/core";
 import Account from "./components/Page/Account";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Form from "./components/Complaint/Form";
-
+import Complaint from "./components/Complaint/Complaint"
 const useStyles = makeStyles((theme) => ({
     App:{
-       
+       height: "100%"
     }
 }));
 function App() {
@@ -33,6 +33,19 @@ function App() {
               </Grid>
             </Grid>
           </Route>
+
+          <Route path="/complaint">
+          <Grid container fullWidth direction="row">
+              <Grid item xs={2}>
+                <Sidebar />
+              </Grid>
+              <Grid item xs={10}>
+                <Header />
+                <Complaint/>
+              </Grid>
+            </Grid>
+          </Route>
+
           <Route path="/complaint">
           <Grid container fullWidth direction="row">
               <Grid item xs={2}>

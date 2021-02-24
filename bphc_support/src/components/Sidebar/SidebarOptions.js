@@ -72,7 +72,7 @@ function SidebarOptions() {
               component={NavLink}
               to="/history"
               className={classes.links}
-              startIcon={<TimelineRoundedIcon />}
+              startIcon={<TimelineRoundedIcon/>}
               activeStyle={{ backgroundColor: "#3581B8" }}
             >
               History

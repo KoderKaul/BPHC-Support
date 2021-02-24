@@ -7,10 +7,11 @@ import bitslogo from "../../img/bitslogo.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "101.6vh",
+    height: "100%",
     backgroundColor: theme.palette.primary.main,
     zIndex: "5",
-    background: "rgba(0, 0, 0, 0.5)"
+    background: "rgba(0, 0, 0, 0.5)",
+    position: "fixed"
   },
   logo: {
     height: "40px",
@@ -24,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
   sidebarHeader:{
       display: "flex",
       alignItems: "center",
-      margin: "20px"
+      margin: "10px 25px",
+      marginLeft: "10px"
   },
 }));
 function Sidebar() {
