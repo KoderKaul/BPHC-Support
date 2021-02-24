@@ -100,7 +100,6 @@ router.post('/login', (req, res, next) => {
   .then(doc =>{
     if(doc.length>0)
     {
-
       const token = jwt.sign(
         {
           email: email
@@ -110,15 +109,12 @@ router.post('/login', (req, res, next) => {
           expiresIn: "2h"
         }
       );
-
       res.status(200).json(
         {
           message: "Auth success",
           token: token
         }
       );
-
-
     } else {
       res.status(404).json(
         {
@@ -127,19 +123,7 @@ router.post('/login', (req, res, next) => {
       );
     }
   })
-
-
-
-
-
-
-
 });
-
-
-
-
-
 
 router.delete('/:email', (req, res,next) => {
   
@@ -158,12 +142,6 @@ router.delete('/:email', (req, res,next) => {
       console.log(err);
   }
   );
-
-
-
-
-
-
 });
 
 router.get('/:email', (req, res,next) => {
@@ -198,9 +176,6 @@ router.get('/', (req, res,next) => {
 
 });
 
-
-
-
 router.patch('/:email', upload.single('studentImage'), (req, res, next) => {
 
   const email = req.params.email;
@@ -224,8 +199,6 @@ router.patch('/:email', upload.single('studentImage'), (req, res, next) => {
   );
 
 });
-
-
 
 
 module.exports = router;
