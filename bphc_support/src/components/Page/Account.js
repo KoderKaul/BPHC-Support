@@ -1,6 +1,5 @@
 import React from "react";
 import ReactRoundedImage from "react-rounded-image";
-import bphc from "../../img/inside-bphc.jpg";
 import MyPhoto from "../../img/inside-bphc.jpeg";
 import {
   TextField,
@@ -10,9 +9,8 @@ import {
   makeStyles,
   InputAdornment,
   Grid,
-  Divider,
 } from "@material-ui/core";
-
+import SaveIcon from '@material-ui/icons/Save';
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -28,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    width: "50vw",
+    width: "55vw",
     alignItems: "center",
     margin: "50px",
     zIndex: "10"
@@ -41,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   buttonSubmit: {
-    marginBottom: 10,
+    margin: "20px 10px"
   },
 }));
 
@@ -139,6 +137,7 @@ function Account() {
               color="primary"
               size="large"
               type="submit"
+              startIcon={<SaveIcon/>}
             >
               Save Changes
             </Button>

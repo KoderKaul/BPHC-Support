@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
 import ErrorIcon from "@material-ui/icons/Error";
+import TimelineRoundedIcon from '@material-ui/icons/TimelineRounded';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,15 +13,15 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   links: {
-      display: "flex",
-    color: "white",
+    display: "flex",
+    color: "#eae7d9",
     backgroundColor: theme.palette.primary.main,
     paddingLeft: "25px",
     paddingRight: "75px",
     paddingTop: "15px",
     paddingBottom: "15px",
     width: "90%",
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
   },
 }));
 
@@ -36,7 +37,7 @@ function SidebarOptions() {
               to="/dashboard"
               className={classes.links}
               startIcon={<DashboardIcon />}
-              activeStyle={{backgroundColor:"#3581B8"}}
+              activeStyle={{ backgroundColor: "#3581B8" }}
             >
               Dashboard
             </Button>
@@ -48,7 +49,7 @@ function SidebarOptions() {
               to="/account"
               className={classes.links}
               startIcon={<PersonIcon />}
-              activeStyle={{backgroundColor:"#3581B8"}}
+              activeStyle={{ backgroundColor: "#3581B8" }}
             >
               Profile
             </Button>
@@ -60,9 +61,21 @@ function SidebarOptions() {
               to="/complaint"
               className={classes.links}
               startIcon={<ErrorIcon />}
-              activeStyle={{backgroundColor:"#3581B8"}}
+              activeStyle={{ backgroundColor: "#3581B8" }}
             >
               Complaint
+            </Button>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Button
+              component={NavLink}
+              to="/history"
+              className={classes.links}
+              startIcon={<TimelineRoundedIcon/>}
+              activeStyle={{ backgroundColor: "#3581B8" }}
+            >
+              History
             </Button>
           </Grid>
         </Grid>

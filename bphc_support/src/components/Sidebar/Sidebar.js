@@ -1,17 +1,17 @@
 import React from "react";
-import { AppBar, Toolbar, makeStyles, Grid } from "@material-ui/core";
+import { makeStyles, Grid,Divider } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { NavLink } from "react-router-dom";
 import SidebarOptions from "./SidebarOptions";
-import MenuIcon from "@material-ui/icons/Menu";
-import bphc from "../../img/inside-bphc.jpg";
 import bitslogo from "../../img/bitslogo.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "101.6vh",
+    height: "100%",
     backgroundColor: theme.palette.primary.main,
     zIndex: "5",
+    background: "rgba(0, 0, 0, 0.5)",
+    position: "fixed"
   },
   logo: {
     height: "40px",
@@ -19,12 +19,14 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px",
   },
   title: {
-    color: "white",
+    color: "#eae7d9",
     textDecoration: "none",
   },
   sidebarHeader:{
       display: "flex",
-      alignItems: "center"
+      alignItems: "center",
+      margin: "10px 25px",
+      marginLeft: "10px"
   },
 }));
 function Sidebar() {
