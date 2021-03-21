@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -55,15 +55,17 @@ const complaints = ["Room issue", "Hostel issue", "Mess issue", "Others"];
 
 function Form() {
   const classes = useStyles();
-  const [hostel, setHostel] = React.useState("");
-  const [complaint, setComplaint] = React.useState("");
 
-  const handleChange = (event) => {
-    setHostel(event.target.value);
-  };
-  const handleComplaintChange = (event) => {
-    setComplaint(event.target.value);
-  };
+  const [postComplaint, setPostComplaint] = useState({
+        studentName: '',
+        studentId: '',
+        studentRoomNo: '',
+        hostelName: '',
+        studentEmail: '',
+        complaintSubject: '',
+        complaintTopic: '',
+        complaintDescription: ''
+  })
   return (
     <Container component="main" className={classes.main}>
       <CssBaseline />
@@ -79,12 +81,16 @@ function Form() {
                 required={true}
                 fullWidth
                 id="name"
+                autoComplete = "off"
                 label="Name"
                 autoFocus
+                value={postComplaint.studentName}
+                onChange={(event) => setPostComplaint({...postComplaint, studentName: event.target.value})}
                 className={classes.textfield}
                 InputProps={{
                   className: classes.input,
                 }}
+                InputLabelProps={{ shrink: true }} 
               />
             </Grid>
             <Grid item xs={6}>
@@ -97,10 +103,12 @@ function Form() {
                 name="id"
                 variant="outlined"
                 required={true}
+                InputLabelProps={{ shrink: true }} 
                 fullWidth
                 id="id"
                 label="ID"
-                autoFocus
+                value={postComplaint.studentId}
+                onChange={(event) => setPostComplaint({...postComplaint, studentId: event.target.value})}
               />
             </Grid>
             <Grid item xs={6}>
@@ -114,9 +122,11 @@ function Form() {
                 variant="outlined"
                 required={true}
                 fullWidth
+                InputLabelProps={{ shrink: true }} 
+                value={postComplaint.studentRoomNo}
+                onChange={(event) => setPostComplaint({...postComplaint, studentRoomNo: event.target.value})}
                 id="room-number"
                 label="Room Number"
-                autoFocus
               />
             </Grid>
             <Grid item xs={12}>
@@ -129,9 +139,10 @@ function Form() {
                 variant="outlined"
                 id="standard-select-hostel"
                 select
+                InputLabelProps={{ shrink: true }} 
                 label="Hostel Name"
-                value={hostel}
-                onChange={handleChange}
+                value={postComplaint.hostelName}
+                onChange={(event) => setPostComplaint({...postComplaint, hostelName: event.target.value})}
               >
                 {hostels.map((option) => (
                   <MenuItem key={option} value={option}>
@@ -150,7 +161,10 @@ function Form() {
                 required={true}
                 fullWidth
                 id="email"
+                InputLabelProps={{ shrink: true }} 
                 label="Email Address"
+                value={postComplaint.studentEmail}
+                onChange={(event) => setPostComplaint({...postComplaint, studentEmail: event.target.value})}
                 name="email"
                 autoComplete="email"
               />
@@ -165,8 +179,11 @@ function Form() {
                 required={true}
                 fullWidth
                 name="subject-complaint"
+                InputLabelProps={{ shrink: true }} 
                 label="Subject of your complaint"
                 id="subject-complaint"
+                value={postComplaint.complaintSubject}
+                onChange={(event) => setPostComplaint({...postComplaint, complaintSubject: event.target.value})}
               />
             </Grid>
 
@@ -181,8 +198,8 @@ function Form() {
                 id="standard-select-hostel"
                 select
                 label="Complaint Topic"
-                value={complaint}
-                onChange={handleComplaintChange}
+                value={postComplaint.complaintTopic}
+                onChange={(event)=> setPostComplaint({...postComplaint, complaintTopic: event.target.value})}
               >
                 {complaints.map((option) => (
                   <MenuItem key={option} value={option}>
@@ -205,6 +222,8 @@ function Form() {
                 name="describe-complaint"
                 label="Describe your complaint"
                 id="describe-complaint"
+                value={postComplaint.complaintDescription}
+                onChange={(event) => setPostComplaint({ complainDescription: event.target.value})}
               />
             </Grid>
           </Grid>
