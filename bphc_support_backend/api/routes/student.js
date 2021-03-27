@@ -1,43 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const multer = require('multer');
 const jwt = require("jsonwebtoken");
-const checkAuth = require('../middleware/check-auth');
-/*const fs = require('fs');
-const path = require('path');
-
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, './uploads/');
-  },
-  filename: function(req, file, cb) {
-    cb(null, Date.now() + file.originalname);
-  }
-});
-
-const fileFilter = (req, file, cb) => {
-  // reject a file
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5
-  },
-  fileFilter: fileFilter
-});*/
+const sanitizer = require('sanitize')();
+const { check } = require('express-validator');
 
 const Student = require("../models/student");
 
-router.post('/signup', (req, res, next) => {
+router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
 
-    Student.find({email: req.body.email})
+  const email = req.body.email;
+
+    Student.find({email: email})
     .exec()
     .then(docs =>
         {
@@ -83,11 +57,10 @@ router.post('/signup', (req, res, next) => {
 });
 
 
-router.post('/login', (req, res, next) => {
+router.post('/login',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
   
   const email = req.body.email;
-
-  var token;
+  console.log(email);
 
   Student.find({email: email})
   .exec()
@@ -112,12 +85,6 @@ router.post('/login', (req, res, next) => {
         }
       );
 
-      var ca = token;
-      var base64Url = ca.split('.')[1];
-      var buff = new Buffer.from(base64Url, 'base64');
-      var decodedValue = JSON.parse(buff.toString('ascii'));
-      console.log(decodedValue);
-
     } else {
       res.status(404).json(
         {
@@ -135,7 +102,7 @@ router.post('/login', (req, res, next) => {
 
 
 
-router.delete('/:email', (req, res,next) => {
+router.delete('/:email',(req, res,next) => {
   
   const email = req.params.email;
 
@@ -197,7 +164,7 @@ router.get('/', (req, res,next) => {
 
 router.patch('/:email', (req, res, next) => {
 
-  const email = req.params.email;
+  const email = sanitizer.value(req.params.email,'string');
 
   const student = new Student();
 
