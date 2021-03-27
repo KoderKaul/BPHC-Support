@@ -1,16 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const jwt = require("jsonwebtoken");
-const sanitizer = require('sanitize')();
+const jwt_token = require("jsonwebtoken");
 const { check } = require('express-validator');
+const sanit = require('sanitize')();
 
 const Student = require("../models/student");
 
 router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
 
-  const email = sanitizer.value(req.body.email,String);
-
+  const email = sanit.value(req.body.email,String);
     Student.find({email: email})
     .exec()
     .then(docs =>
@@ -53,7 +52,7 @@ router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, ne
 });
 router.post('/login',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
   
-  const email = sanitizer.value(req.body.email,String);
+  const email = sanit.value(req.body.email,String);
   console.log(email);
 
   Student.find({email: email})
@@ -62,11 +61,11 @@ router.post('/login',[check('email').isEmail().normalizeEmail()], (req, res, nex
     if(doc.length>0)
     {
 
-      const token = jwt.sign(
+      const token = jwt_token.sign(
         {
           email: email
         }
-        ,process.env.JWT_KEY,
+        ,process.env.jwt_token_KEY,
         {
           expiresIn: "30d"
         }
@@ -138,10 +137,8 @@ router.get('/', (req, res,next) => {
 });
 router.patch('/:email', (req, res, next) => {
 
-  const email = sanitizer.value(req.params.email,'string');
-
+  const email = sanit.value(req.params.email,'string');
   const student = new Student();
-
   for(var attr in req.body)
   {
     student[attr]=req.body[attr];
