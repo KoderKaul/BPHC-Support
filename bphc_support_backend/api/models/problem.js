@@ -10,7 +10,9 @@ const problemSchema = mongoose.Schema(
         studentName: String,
         studentId: String,
         studentRoomNo: String,
-        studentBhawan: String
+        studentBhawan: String,
+        problemStatus: String,
+        problemDate: String
     }
 );
 

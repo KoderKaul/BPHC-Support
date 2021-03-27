@@ -41,10 +41,15 @@ app.use((req, res, next) => {
 const studentRoutes = require("./api/routes/student");
 const adminRoutes = require("./api/routes/admin");
 const problemRoutes = require("./api/routes/problem");
+const courierRoutes = require("./api/routes/courier");
+const noticeRoutes = require("./api/routes/notice");
 
 app.use('/student',studentRoutes);
 app.use('/admin',adminRoutes);
 app.use('/problem',problemRoutes);
+app.use('/courier',courierRoutes);
+app.use('/notice',noticeRoutes);
+
 
 
 
