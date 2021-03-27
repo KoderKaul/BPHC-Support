@@ -68,7 +68,7 @@ router.post('/login',[check('email').isEmail().normalizeEmail()], (req, res, nex
     if(doc.length>0)
     {
 
-      token = jwt.sign(
+      const token = jwt.sign(
         {
           email: email
         }
