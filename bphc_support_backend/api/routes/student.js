@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const sanit = require('sanitize')();
-const jwt_token = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+const sanitizer = require('sanitize')();
 const { check } = require('express-validator');
 
 const Student = require("../models/student");
 
 router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
 
-  const email = sanit.value(req.body.email,String);
+  const email = sanitizer.value(req.body.email,String);
 
     Student.find({email: email})
     .exec()
@@ -50,16 +50,10 @@ router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, ne
             console.log(err);
         }
         );
-    
-    
-
-
 });
-
-
 router.post('/login',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
   
-  const email = sanit.value(req.body.email,String);
+  const email = sanitizer.value(req.body.email,String);
   console.log(email);
 
   Student.find({email: email})
@@ -68,11 +62,11 @@ router.post('/login',[check('email').isEmail().normalizeEmail()], (req, res, nex
     if(doc.length>0)
     {
 
-      const token = jwt_token.sign(
+      const token = jwt.sign(
         {
           email: email
         }
-        ,process.env.jwt_token_KEY,
+        ,process.env.JWT_KEY,
         {
           expiresIn: "30d"
         }
@@ -93,8 +87,6 @@ router.post('/login',[check('email').isEmail().normalizeEmail()], (req, res, nex
       );
     }
   })
-
-
 });
 router.delete('/:email',(req, res,next) => {
   
@@ -114,7 +106,6 @@ router.delete('/:email',(req, res,next) => {
   }
   );
 });
-
 router.get('/:email', (req, res,next) => {
   
   const email = req.params.email;
@@ -131,7 +122,6 @@ router.get('/:email', (req, res,next) => {
   );
 
 });
-
 router.get('/', (req, res,next) => {
     
     Student.find()
@@ -148,7 +138,7 @@ router.get('/', (req, res,next) => {
 });
 router.patch('/:email', (req, res, next) => {
 
-  const email = sanit.value(req.params.email,'string');
+  const email = sanitizer.value(req.params.email,'string');
 
   const student = new Student();
 
