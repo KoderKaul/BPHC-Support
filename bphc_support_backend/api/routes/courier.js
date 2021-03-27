@@ -40,7 +40,7 @@ router.post('/', checkAuth,(req, res, next) => {
 
 router.get('/user',[check('email').isEmail().normalizeEmail()], checkAuth, (req, res,next) => {
   
-  const email = req.body.email;
+  const email = sanitizer.value(req.body.email,String);
 
   Courier.find({studentEmail: email})
   .exec()

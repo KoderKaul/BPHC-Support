@@ -9,7 +9,7 @@ const Student = require("../models/student");
 
 router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
 
-  const email = req.body.email;
+  const email = sanitizer.value(req.body.email,String);
 
     Student.find({email: email})
     .exec()
@@ -59,7 +59,7 @@ router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, ne
 
 router.post('/login',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
   
-  const email = req.body.email;
+  const email = sanitizer.value(req.body.email,String);
   console.log(email);
 
   Student.find({email: email})

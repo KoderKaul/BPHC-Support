@@ -58,7 +58,7 @@ router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, ne
 
 router.post('/login', [check('email').isEmail().normalizeEmail()],(req, res, next) => {
   
-  const email = req.body.email;
+  const email = sanitizer.value(req.body.email,String);
 
   Admin.find({email: email})
   .exec()
