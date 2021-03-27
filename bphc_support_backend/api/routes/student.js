@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const sanit = require('sanitize')();
 const jwt_token = require("jsonwebtoken");
 const { check } = require('express-validator');
-const sanit = require('sanitize')();
 
 const Student = require("../models/student");
 
 router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
 
   const email = sanit.value(req.body.email,String);
+
     Student.find({email: email})
     .exec()
     .then(docs =>
@@ -49,7 +50,13 @@ router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, ne
             console.log(err);
         }
         );
+    
+    
+
+
 });
+
+
 router.post('/login',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
   
   const email = sanit.value(req.body.email,String);
@@ -86,6 +93,8 @@ router.post('/login',[check('email').isEmail().normalizeEmail()], (req, res, nex
       );
     }
   })
+
+
 });
 router.delete('/:email',(req, res,next) => {
   
@@ -105,6 +114,7 @@ router.delete('/:email',(req, res,next) => {
   }
   );
 });
+
 router.get('/:email', (req, res,next) => {
   
   const email = req.params.email;
@@ -121,6 +131,7 @@ router.get('/:email', (req, res,next) => {
   );
 
 });
+
 router.get('/', (req, res,next) => {
     
     Student.find()
@@ -138,7 +149,9 @@ router.get('/', (req, res,next) => {
 router.patch('/:email', (req, res, next) => {
 
   const email = sanit.value(req.params.email,'string');
+
   const student = new Student();
+
   for(var attr in req.body)
   {
     student[attr]=req.body[attr];
@@ -155,4 +168,4 @@ router.patch('/:email', (req, res, next) => {
   );
 
 });
-module.exports = router;
+module.exports = router
