@@ -5,9 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware, compose } from "redux";
-import thunk from "redux-thunk";
-import reducers from "./reducers";
+import { BrowserRouter as Router } from "react-router-dom";
+import { store } from "./redux/store";
 
 const theme = createMuiTheme({
   palette: {
@@ -18,17 +17,21 @@ const theme = createMuiTheme({
       main: "#3581B8",
     },
   },
+  typography: {
+    fontFamily: ["Poppins", "sans-serif"].join(","),
+    fontWeight: "600",
+  },
 });
 
-const store = createStore(reducers, compose(applyMiddleware(thunk)));
-
 ReactDOM.render(
-    <Provider store={store}>
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App/>
-    </ThemeProvider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <App />
+        </Router>
+      </ThemeProvider>
+    </React.StrictMode>
   </Provider>,
   document.getElementById("root")
 );

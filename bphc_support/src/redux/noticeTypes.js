@@ -1,0 +1,2 @@
+export const FETCH_ALL_NOTICES = "FETCH_ALL_NOTICES";
+export const POST_NOTICE = "POST_NOTICE";
