@@ -9,7 +9,7 @@ const Admin = require("../models/admin");
 
 router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
 
-  const email = req.body.email;
+  const email = req.body.email.toString();
 
     Admin.find({email: email})
     .exec()
