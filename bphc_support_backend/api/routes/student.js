@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const jwt = require("jsonwebtoken");
 const sanitizer = require('sanitize')();
+const jwt = require("jsonwebtoken");
 const { check } = require('express-validator');
 
 const Student = require("../models/student");
