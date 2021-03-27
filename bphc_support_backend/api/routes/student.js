@@ -96,12 +96,6 @@ router.post('/login',[check('email').isEmail().normalizeEmail()], (req, res, nex
 
 
 });
-
-
-
-
-
-
 router.delete('/:email',(req, res,next) => {
   
   const email = req.params.email;
@@ -119,12 +113,6 @@ router.delete('/:email',(req, res,next) => {
       console.log(err);
   }
   );
-
-
-
-
-
-
 });
 
 router.get('/:email', (req, res,next) => {
@@ -158,10 +146,6 @@ router.get('/', (req, res,next) => {
     );
 
 });
-
-
-
-
 router.patch('/:email', (req, res, next) => {
 
   const email = sanit.value(req.params.email,'string');
@@ -184,8 +168,4 @@ router.patch('/:email', (req, res, next) => {
   );
 
 });
-
-
-
-
 module.exports = router;
