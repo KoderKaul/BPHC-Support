@@ -16,7 +16,7 @@ export const postProblemSuccess = (data) => {
 export const fetchProblems = () => {
   return (dispatch) => {
     axios
-      .get("http://localhost:5000/problem/")
+      .get("https://bphcsupportapi.herokuapp.com/problem/")
       .then((res) => {
         dispatch(fetchProblemsSuccess(res.data));
       })
@@ -28,7 +28,7 @@ const token =
 export const postProblem = (data) => {
   return (dispatch) => {
     axios
-      .post("http://localhost:5000/problem/", data, {
+      .post("https://bphcsupportapi.herokuapp.com/problem/", data, {
         headers: {
           authorization: token,
         },

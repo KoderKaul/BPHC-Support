@@ -41,6 +41,7 @@
       "not dead",
       "not op_mini all"
     ],
+    "proxy":"https://bphc-support.herokuapp.com/login",
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

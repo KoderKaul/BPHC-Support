@@ -16,7 +16,7 @@ export const postNoticeSuccess = (data) => {
 export const fetchNotices = () => {
   return (dispatch) => {
     axios
-      .get("http://localhost:5000/notice/")
+      .get("https://bphcsupportapi.herokuapp.com/notice/")
       .then((res) => {
         dispatch(fetchNoticesSuccess(res.data));
       })
@@ -28,7 +28,7 @@ const token =
 export const postNotice = (data) => {
   return (dispatch) => {
     axios
-      .post("http://localhost:5000/notice/", data, {
+      .post("https://bphcsupportapi.herokuapp.com/notice/", data, {
         headers: {
           authorization: token,
         },
