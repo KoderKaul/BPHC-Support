@@ -6,7 +6,7 @@ import TimelineRoundedIcon from "@material-ui/icons/TimelineRounded";
 export const SidebarOptionsAdmin = [
   {
     Name: "Dashboard",
-    to: "/admin",
+    to: "/admin/home",
     subMenuItems: [],
     Icon: <DashboardIcon />,
   },

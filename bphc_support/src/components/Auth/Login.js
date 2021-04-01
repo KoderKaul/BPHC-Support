@@ -35,7 +35,7 @@ function Login() {
     //login
     try {
       dispatch(loginSuccess(result, token));
-      history.push("/");
+      history.push("/home");
     } catch (error) {}
   };
 

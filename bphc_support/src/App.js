@@ -33,7 +33,7 @@ function App() {
             <AddNotices />
           </div>
         </Route>
-        <Route exact path="/login">
+        <Route exact path="/">
           <div className={classes.Login}>
             <Login />
           </div>
@@ -59,7 +59,7 @@ function App() {
             <Complaint />
           </div>
         </Route>
-        <Route exact path="/">
+        <Route exact path="/home">
           <Sidebar type="student" />
           <div className={classes.MainView}>
             <Header title="Notices" />

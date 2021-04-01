@@ -29,7 +29,7 @@ function Header({ title }) {
   //logout
   const handleLogout = () => {
     dispatch(logoutAction());
-    history.push("/login");
+    history.push("/");
     setUser(null);
   };
 

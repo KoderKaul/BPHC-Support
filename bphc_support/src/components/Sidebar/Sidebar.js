@@ -18,7 +18,7 @@ function Sidebar(props) {
           variant="h4"
           className={classes.title}
           component={NavLink}
-          to="/"
+          to="/home"
         >
           BPHC Support
         </Typography>

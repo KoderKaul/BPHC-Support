@@ -2,7 +2,6 @@
   "name": "bphc_support",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/login",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
@@ -41,7 +40,6 @@
       "not dead",
       "not op_mini all"
     ],
-    "proxy":"https://bphc-support.herokuapp.com/login",
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
