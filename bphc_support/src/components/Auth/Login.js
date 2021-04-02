@@ -44,8 +44,8 @@ function Login() {
   };
 
   return (
-    <Grid container direction="column" alignItems="center">
-      <Grid item xs={6} className={classes.left}>
+    <Grid container direction="column" alignItems="center" className={classes.main}>
+      <Grid item xs={6}>
         <img alt="Sign In" src={signin} className={classes.signin} />
       </Grid>
       <CssBaseline />

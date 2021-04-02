@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState}from "react";
 import ReactRoundedImage from "react-rounded-image";
 import MyPhoto from "../../../img/inside-bphc.jpeg";
 import {
@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
+    overflowY: "scroll",
+      "&::-webkit-scrollbar": {
+      display: "none",
+    },
   },
   paper: {
     display: "flex",
@@ -45,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Account() {
   const classes = useStyles();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   return (
     <div className={classes.main}>
       <Paper className={classes.paper} variant="outlined">
@@ -60,7 +65,7 @@ function Account() {
           </Grid>
           <Grid item xs={12}>
             <ReactRoundedImage
-              image={MyPhoto}
+              image={user.result.imageUrl}
               roundedColor="#321124"
               imageWidth="250"
               imageHeight="250"
@@ -78,7 +83,7 @@ function Account() {
               }}
               fullWidth
               autoComplete="off"
-              value="Pranay Piyush"
+              value={user.result.name}
               size="small"
             />
             <TextField
@@ -91,7 +96,7 @@ function Account() {
               }}
               fullWidth
               autoComplete="off"
-              value="f20180369@hyderabad.bits-pilani.ac.in"
+              value={user.result.email}
               size="small"
             />
             <TextField

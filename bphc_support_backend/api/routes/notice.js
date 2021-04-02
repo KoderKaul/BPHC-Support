@@ -9,8 +9,6 @@ router.post("/", checkAuth, (req, res, next) => {
   const notice = new Notice();
 
   notice["_id"] = new mongoose.Types.ObjectId();
-  notice["noticeDate"] = new Date();
-
   for (var attr in req.body) {
     notice[attr] = req.body[attr];
   }

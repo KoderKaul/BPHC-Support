@@ -4,7 +4,9 @@ const courierSchema = mongoose.Schema(
     {
         _id: mongoose.Schema.Types.ObjectId,
         studentName: String,
-        studentEmail: String
+        studentEmail: String,
+        studentRoomNo: String,
+        
     }
 );
 
