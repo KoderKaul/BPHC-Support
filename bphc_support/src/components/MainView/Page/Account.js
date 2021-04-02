@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactRoundedImage from "react-rounded-image";
 import MyPhoto from "../../../img/inside-bphc.jpeg";
 import {
@@ -10,7 +10,7 @@ import {
   InputAdornment,
   Grid,
 } from "@material-ui/core";
-import SaveIcon from '@material-ui/icons/Save';
+import SaveIcon from "@material-ui/icons/Save";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
+    overflowY: "scroll",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
   },
   paper: {
     display: "flex",
@@ -29,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     width: "55vw",
     alignItems: "center",
     margin: "50px",
-    zIndex: "10"
+    zIndex: "10",
   },
   form: {
     display: "flex",
@@ -39,12 +43,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   buttonSubmit: {
-    margin: "20px 10px"
+    margin: "20px 10px",
   },
 }));
 
 function Account() {
   const classes = useStyles();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   return (
     <div className={classes.main}>
       <Paper className={classes.paper} variant="outlined">
@@ -60,7 +65,7 @@ function Account() {
           </Grid>
           <Grid item xs={12}>
             <ReactRoundedImage
-              image={MyPhoto}
+              image={user.result.imageUrl}
               roundedColor="#321124"
               imageWidth="250"
               imageHeight="250"
@@ -78,7 +83,7 @@ function Account() {
               }}
               fullWidth
               autoComplete="off"
-              value="Pranay Piyush"
+              value={user.result.name}
               size="small"
             />
             <TextField
@@ -91,7 +96,7 @@ function Account() {
               }}
               fullWidth
               autoComplete="off"
-              value="f20180369@hyderabad.bits-pilani.ac.in"
+              value={user.result.email}
               size="small"
             />
             <TextField
@@ -137,7 +142,7 @@ function Account() {
               color="primary"
               size="large"
               type="submit"
-              startIcon={<SaveIcon/>}
+              startIcon={<SaveIcon />}
             >
               Save Changes
             </Button>
