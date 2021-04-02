@@ -1,4 +1,4 @@
-import { FETCH_ALL_NOTICES } from "../noticeTypes";
+import { FETCH_ALL_NOTICES, POST_NOTICE } from "../noticeTypes";
 
 const initialState = {
   notices: [],
@@ -11,6 +11,12 @@ export const noticeReducer = (state = initialState, action) => {
         ...state,
         notices: action.payload,
       };
+    
+      case POST_NOTICE:
+        return {
+            ...state,
+            notices: [...state.notices, action.payload]
+          };
     default:
       return state;
   }

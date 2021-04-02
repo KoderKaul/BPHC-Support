@@ -11,65 +11,38 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import useStyles from "./Notice.styles";
 import defaultImg from "../../../../img/audi.jpg";
+import moment from "moment";
 function Notice({ notice }) {
   const classes = useStyles();
   return (
-    <div className={classes.NoticeContainer}>
-      <Card
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          borderRadius: "5px",
-          height: "100%",
-          position: "relative",
-        }}
-      >
+    <div className={classes.mainContainer}>
+      <Card className={classes.NoticeContainer}>
         <CardMedia
-          style={{
-            height: "500px",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            backgroundBlendMode: "darken",
-          }}
-          image={defaultImg}
-          title="Loremsum"
+          className={classes.NoticeImg}
+          image={notice.noticeImage || defaultImg}
+          title={notice.noticeTitle}
         />
-        <div
-          style={{
-            position: "absolute",
-            top: "20px",
-            left: "20px",
-            color: "white",
-          }}
-        >
+        <div className={classes.overlay}>
           <Typography variant="h6">{notice.noticeTitle}</Typography>
-          <Typography variant="body2">22/1/21 22:11</Typography>
+          <Typography variant="body2">{moment(notice.createdAt).fromNow()}</Typography>
         </div>
-        <div
-          style={{
-            position: "absolute",
-            top: "20px",
-            right: "20px",
-            color: "white",
-          }}
-        >
+
+        <div className={classes.overlay2}>
           <Button style={{ color: "white" }} size="small">
             <MoreHorizIcon fontSize="default" />
           </Button>
         </div>
         <Typography
-          style={{
-            padding: "0 16px",
-          }}
+          className={classes.title}
           gutterBottom
           variant="h5"
           component="h2"
         >
-          Movie Screening
+          {notice.noticeSubTitle || notice.noticeTitle}
         </Typography>
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            Saturday, 8pm
+            {notice.eventTiming || "2nd April"} 
           </Typography>
         </CardContent>
         <CardContent>
@@ -77,17 +50,18 @@ function Notice({ notice }) {
             {notice.noticeDesc}
           </Typography>
         </CardContent>
-        <CardActions
-          style={{
-            padding: "0 16px 8px 16px",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {notice.noticeIssuedBy}
+          </Typography>
+        </CardContent>
+        {/*<CardActions
+          className={classes.CardActions}
         >
           <Button size="small" color="primary">
             <DeleteIcon fontSize="small" /> Delete{" "}
           </Button>
-        </CardActions>
+        </CardActions>*/}
       </Card>
     </div>
   );
