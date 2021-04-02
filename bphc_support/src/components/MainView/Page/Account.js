@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   buttonSubmit: {
-    margin: "20px 10px"
+    margin: "20px 10px",
   },
 }));
 
