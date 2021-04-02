@@ -14,6 +14,7 @@ import Login from "./components/Auth/Login";
 import Header from "./components/Header/Header";
 import AddNotices from "./components/Admin/AddNotices/AddNotices";
 import { fetchProblems } from "./redux/problemActions";
+import Couriers from "./components/Couriers/Couriers"
 function App() {
   const classes = useStyles();
 
@@ -26,7 +27,15 @@ function App() {
   return (
     <div className={classes.App}>
       <Switch>
-        <Route exact path="/about">
+        <Route exact path="/admin/courier">
+          <Sidebar type="student" />
+          <div className={classes.MainView}>
+            <Header />
+            <Couriers/>
+          </div>
+        </Route>
+
+        <Route exact path="/admin/notice">
           <Sidebar type="student" />
           <div className={classes.MainView}>
             <Header />
