@@ -18,6 +18,7 @@ import { GoogleLogin } from "react-google-login";
 import useStyles from "./Login.styles";
 import { useHistory } from "react-router-dom";
 import { loginSuccess } from "../../redux/authActions";
+import axios from "axios";
 
 function Login() {
   const classes = useStyles();
@@ -35,7 +36,32 @@ function Login() {
     //login
     try {
       dispatch(loginSuccess(result, token));
-      history.push("/home");
+      axios
+        .post("https://bphcsupportapi.herokuapp.com/student/login", {
+          email: result.email,
+        })
+        .then((res) => {
+          console.log("res:", res);
+          localStorage.setItem("token", res.data.token);
+          history.push("/home");
+        })
+        .catch((err) => {
+          console.log(err.message);
+          axios
+            .post("https://bphcsupportapi.herokuapp.com/student/signup", {
+              email: result.email,
+              name: result.name,
+              studentImage: result.imageUrl,
+            })
+            .then((res) => {
+              console.log("res:", res);
+              localStorage.setItem("token", res.data.token);
+              history.push("/home");
+            })
+            .catch((err) => {
+              console.log(err.message);
+            });
+        });
     } catch (error) {}
   };
 
@@ -44,7 +70,12 @@ function Login() {
   };
 
   return (
-    <Grid container direction="column" alignItems="center" className={classes.main}>
+    <Grid
+      container
+      direction="column"
+      alignItems="center"
+      className={classes.main}
+    >
       <Grid item xs={6}>
         <img alt="Sign In" src={signin} className={classes.signin} />
       </Grid>

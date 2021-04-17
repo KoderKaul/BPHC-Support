@@ -9,7 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import FileBase from "react-file-base64";
 import useStyles from "./AddNotices.styles";
-import {postNotice} from "../../../redux/noticeActions"
+import { postNotice } from "../../../redux/noticeActions";
 
 function AddNotices() {
   const [postNoticeData, setPostNoticeData] = useState({
@@ -84,6 +84,7 @@ function AddNotices() {
             label="Event Date"
             InputLabelProps={{ shrink: true }}
             fullWidth
+            required
             type="date"
             value={postNoticeData.eventTiming}
             onChange={(e) =>

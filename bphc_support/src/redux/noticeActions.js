@@ -23,14 +23,12 @@ export const fetchNotices = () => {
       .catch((error) => console.log(error.message));
   };
 };
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQHRlc3QuY29tIiwiaWF0IjoxNjE2NDgyMzM5LCJleHAiOjE2MTkwNzQzMzl9.h7f_56PXaBhNJ0FYn4_7zkJI3FIE8qUa1HwhH3ttQIo";
 export const postNotice = (data) => {
   return (dispatch) => {
     axios
-      .post("https://bphcsupportapi.herokuapp.com/notice/", data, {
+      .post("https://bphcsupportapi.herokuapp.com/notice", data, {
         headers: {
-          authorization: token,
+          authorization: localStorage.getItem("token"),
         },
       })
       .then(() => {

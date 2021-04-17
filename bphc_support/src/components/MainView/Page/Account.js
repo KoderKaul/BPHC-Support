@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
-=======
-import React, {useState}from "react";
->>>>>>> 1f2194e595e2b21ab5a860f1476f5bd7a5a5311e
 import ReactRoundedImage from "react-rounded-image";
 import MyPhoto from "../../../img/inside-bphc.jpeg";
 import {
@@ -15,6 +11,7 @@ import {
   Grid,
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -26,11 +23,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "flex-start",
     justifyContent: "center",
     overflowY: "scroll",
-<<<<<<< HEAD
     "&::-webkit-scrollbar": {
-=======
-      "&::-webkit-scrollbar": {
->>>>>>> 1f2194e595e2b21ab5a860f1476f5bd7a5a5311e
       display: "none",
     },
   },
@@ -54,10 +47,30 @@ const useStyles = makeStyles((theme) => ({
     margin: "20px 10px",
   },
 }));
-
+const saveData = () => {};
 function Account() {
   const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [name, setname] = useState("");
+  const [email, setemail] = useState("");
+  const [hostel, sethostel] = useState("");
+  const [room, setroom] = useState("");
+  const [phone, setphone] = useState("");
+  const [studentImage, setstudentImage] = useState("");
+  axios
+    .get("https://bphcsupportapi.herokuapp.com/student/" + user.result.email)
+    .then((res) => {
+      setname(res.data[0].name != undefined ? res.data[0].name : "");
+      setemail(res.data[0].email != undefined ? res.data[0].email : "");
+      sethostel(res.data[0].bhawan != undefined ? res.data[0].bhawan : "");
+      setroom(res.data[0].roomNo != undefined ? res.data[0].roomNo : "");
+      setphone(res.data[0].phone != undefined ? res.data[0].phone : "");
+      setstudentImage(
+        res.data[0].studentImage != undefined ? res.data[0].studentImage : ""
+      );
+    })
+    .catch((error) => console.log(error.message));
+
   return (
     <div className={classes.main}>
       <Paper className={classes.paper} variant="outlined">
@@ -73,7 +86,7 @@ function Account() {
           </Grid>
           <Grid item xs={12}>
             <ReactRoundedImage
-              image={user.result.imageUrl}
+              image={studentImage}
               roundedColor="#321124"
               imageWidth="250"
               imageHeight="250"
@@ -91,7 +104,7 @@ function Account() {
               }}
               fullWidth
               autoComplete="off"
-              value={user.result.name}
+              value={name}
               size="small"
             />
             <TextField
@@ -104,7 +117,7 @@ function Account() {
               }}
               fullWidth
               autoComplete="off"
-              value={user.result.email}
+              value={email}
               size="small"
             />
             <TextField
@@ -116,6 +129,7 @@ function Account() {
                 ),
               }}
               fullWidth
+              value={hostel}
               autoComplete="off"
               size="small"
             />
@@ -128,6 +142,7 @@ function Account() {
                 ),
               }}
               fullWidth
+              value={room}
               autoComplete="off"
               size="small"
             />
@@ -139,6 +154,7 @@ function Account() {
                   <InputAdornment position="start">Phone No.</InputAdornment>
                 ),
               }}
+              value={phone}
               fullWidth
               autoComplete="off"
               size="small"
@@ -150,6 +166,7 @@ function Account() {
               color="primary"
               size="large"
               type="submit"
+              onClick={saveData}
               startIcon={<SaveIcon />}
             >
               Save Changes
