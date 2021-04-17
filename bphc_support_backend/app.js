@@ -11,9 +11,9 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 
 mongoose.connect(
     "mongodb+srv://vatsu:"
-    +process.env.MONGO_ATLAS_PW
+    +"vatsu"
     +"@cluster0.u46ll.mongodb.net/"
-    +process.env.MONGO_ATLAS_DB
+    +"vatsu"
     +"?retryWrites=true&w=majority",
     {
         useNewUrlParser: true,

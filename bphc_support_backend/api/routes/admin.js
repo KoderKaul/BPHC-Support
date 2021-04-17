@@ -2,14 +2,13 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const jwt = require("jsonwebtoken");
-const sanitizer = require('sanitize')();
 const { check } = require('express-validator');
 
 const Admin = require("../models/admin");
 
 router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
 
-  const email = sanitizer.value(req.body.email,String);
+  const email = req.body.email;
 
     Admin.find({email: email})
     .exec()
@@ -58,7 +57,7 @@ router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, ne
 
 router.post('/login', [check('email').isEmail().normalizeEmail()],(req, res, next) => {
   
-  const email = sanitizer.value(req.body.email,String);
+  const email = req.body.email;
 
   Admin.find({email: email})
   .exec()
@@ -70,7 +69,7 @@ router.post('/login', [check('email').isEmail().normalizeEmail()],(req, res, nex
         {
           email: email
         }
-        ,process.env.JWT_KEY,
+        ,"secret",
         {
           expiresIn: "2h"
         }
@@ -108,7 +107,7 @@ router.post('/login', [check('email').isEmail().normalizeEmail()],(req, res, nex
 
 router.delete('/:email', (req, res,next) => {
   
-  const email = sanitizer.value(req.params.email,'string');
+  const email = req.params.email;
 
   Admin.remove({email: email})
   .exec()
@@ -133,7 +132,7 @@ router.delete('/:email', (req, res,next) => {
 
 router.get('/:email', (req, res,next) => {
   
-  const email = sanitizer.value(req.params.email,'string');
+  const email = req.params.email;
 
   Admin.find({email: email})
   .exec()
@@ -168,7 +167,7 @@ router.get('/', (req, res,next) => {
 
 router.patch('/:email', (req, res, next) => {
 
-  const email = sanitizer.value(req.params.email,'string');
+  const email = req.params.email;
 
   const admin = new Admin();
 

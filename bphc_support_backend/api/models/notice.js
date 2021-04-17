@@ -7,12 +7,9 @@ const noticeSchema = mongoose.Schema(
         noticeSubTitle: String,
         noticeDesc: String,
         noticeImage: String,
-        eventTiming: String,
-        noticeIssuedBy: String,
-        createdAt: {
-            type: Date,
-            default: new Date(),
-        },
+        noticeDate: String,
+        issuedBy: String,
+        eventTiming: String
     }
 );
 

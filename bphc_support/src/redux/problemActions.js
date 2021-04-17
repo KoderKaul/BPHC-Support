@@ -16,15 +16,17 @@ export const postProblemSuccess = (data) => {
 export const fetchProblems = () => {
   return (dispatch) => {
     axios
-      .get("https://bphcsupportapi.herokuapp.com/problem/user", {
-        body: {
-          email: JSON.parse(localStorage.getItem("profile")).email,
-        },
-        headers: {
-          authorization: localStorage.getItem("token"),
-        },
-      })
+      .get(
+        "https://bphcsupportapi.herokuapp.com/problem/user/" +
+          JSON.parse(localStorage.getItem("profile")).result.email,
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
+      )
       .then((res) => {
+        console.log(res);
         dispatch(fetchProblemsSuccess(res.data));
       })
       .catch((error) => console.log(error.message));

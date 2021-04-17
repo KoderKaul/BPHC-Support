@@ -55,6 +55,21 @@ router.get('/user',[check('email').isEmail().normalizeEmail()], checkAuth, (req,
 
 });
 
+router.get('/', (req, res,next) => {
+  
+  Courier.find()
+  .exec()
+  .then(doc =>{
+    res.status(200).json(doc);
+  }
+  )
+  .catch(err => {
+    console.log(err);
+  }
+  );
+
+});
+
 
 
 
