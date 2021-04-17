@@ -11,8 +11,17 @@ export default makeStyles((theme) => ({
     flexDirection: "column",
     height: "100%",
     width: "100%",
+    overflowY: "scroll",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
+    
   },
   Login: {
     width: "100%",
+    overflowY: "scroll",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
   },
 }));

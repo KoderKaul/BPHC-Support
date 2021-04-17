@@ -17,8 +17,8 @@ function AddNotices() {
     noticeSubTitle: "",
     noticeDesc: "",
     noticeImage: "",
+    noticeIssuedBy: "",
     eventTiming: new Date(),
-    issuedBy: "",
   });
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -28,10 +28,9 @@ function AddNotices() {
       noticeTitle: "",
       noticeSubTitle: "",
       noticeDesc: "",
-      tags: "",
       noticeImage: "",
+      noticeIssuedBy: "",
       eventTiming: new Date(),
-      issuedBy: "",
     });
   };
 
@@ -110,15 +109,15 @@ function AddNotices() {
             }
           />
           <TextField
-            name="issuedBy"
+            name="noticeIssuedBy"
             variant="outlined"
             label="Issued By"
             fullWidth
-            value={postNoticeData.issuedBy}
+            value={postNoticeData.noticeIssuedBy}
             onChange={(e) =>
               setPostNoticeData({
                 ...postNoticeData,
-                issuedBy: e.target.value,
+                noticeIssuedBy: e.target.value,
               })
             }
           />

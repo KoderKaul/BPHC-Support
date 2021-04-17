@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
+=======
+import React, {useState}from "react";
+>>>>>>> 1f2194e595e2b21ab5a860f1476f5bd7a5a5311e
 import ReactRoundedImage from "react-rounded-image";
 import MyPhoto from "../../../img/inside-bphc.jpeg";
 import {
@@ -22,7 +26,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "flex-start",
     justifyContent: "center",
     overflowY: "scroll",
+<<<<<<< HEAD
     "&::-webkit-scrollbar": {
+=======
+      "&::-webkit-scrollbar": {
+>>>>>>> 1f2194e595e2b21ab5a860f1476f5bd7a5a5311e
       display: "none",
     },
   },

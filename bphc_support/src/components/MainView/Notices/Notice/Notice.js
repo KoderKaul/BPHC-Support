@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Card,
-  CardActions,
   CardContent,
   CardMedia,
   Button,
   Typography,
 } from "@material-ui/core/";
-import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import useStyles from "./Notice.styles";
 import defaultImg from "../../../../img/audi.jpg";
+
+
 import moment from "moment";
 function Notice({ notice }) {
   const classes = useStyles();
@@ -52,7 +52,7 @@ function Notice({ notice }) {
         </CardContent>
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            {notice.noticeIssuedBy}
+            {notice.issuedBy}
           </Typography>
         </CardContent>
         {/*<CardActions

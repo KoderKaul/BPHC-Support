@@ -16,9 +16,11 @@ export default makeStyles((theme) => ({
     position: "relative",
   },
   NoticeImg: {
-    height: "500px",
+    height: 0,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     backgroundBlendMode: "darken",
+    paddingTop: "50.25%",
+    paddingBottom: "-10%"
   },
   cardActions: {
     padding: "0 16px 8px 16px",
