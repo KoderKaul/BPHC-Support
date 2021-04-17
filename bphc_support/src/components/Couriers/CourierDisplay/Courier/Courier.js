@@ -12,7 +12,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import useStyles from "./Courier.styles";
 import note_bg from "../../../../img/jared.jpg";
 
-function Courier({ note }) {
+function Courier(courier) {
   const classes = useStyles();
 
   return (
