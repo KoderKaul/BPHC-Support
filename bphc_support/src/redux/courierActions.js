@@ -16,23 +16,34 @@ export const postCourierSuccess = (data) => {
 export const fetchCouriers = () => {
   return (dispatch) => {
     axios
-      .get("https://bphcsupportapi.herokuapp.com/courier/")
+      .get("http://localhost:5000/courier/user", {
+        email: JSON.parse(localStorage.getItem("profile")).result.email,
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      })
       .then((res) => {
         dispatch(fetchCouriersSuccess(res.data));
       })
       .catch((error) => console.log(error.message));
   };
 };
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQHRlc3QuY29tIiwiaWF0IjoxNjE2NDgyMzM5LCJleHAiOjE2MTkwNzQzMzl9.h7f_56PXaBhNJ0FYn4_7zkJI3FIE8qUa1HwhH3ttQIo";
 export const postCourier = (data) => {
   return (dispatch) => {
     axios
-      .post("https://bphcsupportapi.herokuapp.com/courier/", data, {
-        headers: {
-          authorization: token,
+      .post(
+        "http://localhost:5000/courier/",
+        {
+          studentEmail: JSON.parse(localStorage.getItem("profile")).result
+            .email,
+          studentName: JSON.parse(localStorage.getItem("profile")).result.name,
         },
-      })
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
+      )
       .then(() => {
         console.log(data);
         return dispatch(postCourierSuccess(data));

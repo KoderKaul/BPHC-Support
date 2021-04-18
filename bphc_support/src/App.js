@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
 // import { getProblems } from "./actions/problems";
 import { Route, Switch } from "react-router-dom";
 import useStyles from "./App.styles";
@@ -13,16 +12,10 @@ import History from "./components/MainView/Complaints/Complaints";
 import Login from "./components/Auth/Login";
 import Header from "./components/Header/Header";
 import AddNotices from "./components/Admin/AddNotices/AddNotices";
-import { fetchProblems } from "./redux/problemActions";
-import Couriers from "./components/Couriers/Couriers"
+
+import Couriers from "./components/Couriers/Couriers";
 function App() {
   const classes = useStyles();
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchProblems());
-  }, [dispatch]);
 
   return (
     <div className={classes.App}>
@@ -31,7 +24,7 @@ function App() {
           <Sidebar type="student" />
           <div className={classes.MainView}>
             <Header />
-            <Couriers/>
+            <Couriers />
           </div>
         </Route>
 

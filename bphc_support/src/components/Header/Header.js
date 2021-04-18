@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import { useHistory, useLocation } from "react-router-dom";
 import { logoutAction } from "../../redux/authActions";
+import axios from "axios";
 
 function Header({ title }) {
   const classes = useStyles();
@@ -19,8 +20,19 @@ function Header({ title }) {
   const history = useHistory();
   const location = useLocation();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [studentImage, setstudentImage] = useState("");
   //   console.log(user);
-
+  axios
+    .get("https://bphcsupportapi.herokuapp.com/student/" + user.result.email)
+    .then((res) => {
+      console.log("axios");
+      setstudentImage(
+        res.data[0].studentImage != undefined
+          ? res.data[0].studentImage
+          : user.result.imageUrl
+      );
+    })
+    .catch((error) => console.log(error.message));
   useEffect(() => {
     const token = user?.token;
 
@@ -53,7 +65,7 @@ function Header({ title }) {
                     <Typography variant="body1" className={classes.Title}>
                       Welcome, {user.result.name}
                     </Typography>
-                    <Avatar src={user.result.imageUrl}></Avatar>
+                    <Avatar src={studentImage}></Avatar>
                     <IconButton
                       color="primary"
                       aria-label="upload picture"

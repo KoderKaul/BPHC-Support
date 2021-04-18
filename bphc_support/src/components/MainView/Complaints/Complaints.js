@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 const Complaints = ({ setCurrentId }) => {
   const problems = useSelector((state) => state.problem.problems);
   const classes = useStyles();
-  console.log(problems);
+  //   console.log(problems);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProblems());

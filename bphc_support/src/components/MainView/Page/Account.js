@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactRoundedImage from "react-rounded-image";
 import MyPhoto from "../../../img/inside-bphc.jpeg";
 import {
@@ -11,6 +11,7 @@ import {
   Grid,
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
+import FileBase from "react-file-base64";
 import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "20px 10px",
   },
 }));
-const saveData = () => {};
+
 function Account() {
   const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -57,20 +58,39 @@ function Account() {
   const [room, setroom] = useState("");
   const [phone, setphone] = useState("");
   const [studentImage, setstudentImage] = useState("");
-  axios
-    .get("https://bphcsupportapi.herokuapp.com/student/" + user.result.email)
-    .then((res) => {
-      setname(res.data[0].name != undefined ? res.data[0].name : "");
-      setemail(res.data[0].email != undefined ? res.data[0].email : "");
-      sethostel(res.data[0].bhawan != undefined ? res.data[0].bhawan : "");
-      setroom(res.data[0].roomNo != undefined ? res.data[0].roomNo : "");
-      setphone(res.data[0].phone != undefined ? res.data[0].phone : "");
-      setstudentImage(
-        res.data[0].studentImage != undefined ? res.data[0].studentImage : ""
-      );
-    })
-    .catch((error) => console.log(error.message));
-
+  useEffect(() => {
+    axios
+      .get("https://bphcsupportapi.herokuapp.com/student/" + user.result.email)
+      .then((res) => {
+        console.log("axios");
+        setname(res.data[0].name != undefined ? res.data[0].name : "");
+        setemail(res.data[0].email != undefined ? res.data[0].email : "");
+        sethostel(res.data[0].bhawan != undefined ? res.data[0].bhawan : "");
+        setroom(res.data[0].roomNo != undefined ? res.data[0].roomNo : "");
+        setphone(res.data[0].phoneNo != undefined ? res.data[0].phoneNo : "");
+        setstudentImage(
+          res.data[0].studentImage != undefined ? res.data[0].studentImage : ""
+        );
+      })
+      .catch((error) => console.log(error.message));
+  }, []);
+  const saveData = () => {
+    console.log(phone);
+    axios
+      .patch(
+        "https://bphcsupportapi.herokuapp.com/student/" + user.result.email,
+        {
+          bhawan: hostel,
+          roomNo: room,
+          phoneNo: phone,
+          studentImage: studentImage,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => console.log(error.message));
+  };
   return (
     <div className={classes.main}>
       <Paper className={classes.paper} variant="outlined">
@@ -92,6 +112,11 @@ function Account() {
               imageHeight="250"
               roundedSize="10"
             />
+            <FileBase
+              type="file"
+              multiple={false}
+              onDone={({ base64 }) => setstudentImage(base64)}
+            />
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -104,6 +129,7 @@ function Account() {
               }}
               fullWidth
               autoComplete="off"
+              disabled
               value={name}
               size="small"
             />
@@ -117,6 +143,7 @@ function Account() {
               }}
               fullWidth
               autoComplete="off"
+              disabled
               value={email}
               size="small"
             />
@@ -129,6 +156,7 @@ function Account() {
                 ),
               }}
               fullWidth
+              onChange={(e) => sethostel(e.target.value)}
               value={hostel}
               autoComplete="off"
               size="small"
@@ -143,6 +171,7 @@ function Account() {
               }}
               fullWidth
               value={room}
+              onChange={(e) => setroom(e.target.value)}
               autoComplete="off"
               size="small"
             />
@@ -155,6 +184,7 @@ function Account() {
                 ),
               }}
               value={phone}
+              onChange={(e) => setphone(e.target.value)}
               fullWidth
               autoComplete="off"
               size="small"

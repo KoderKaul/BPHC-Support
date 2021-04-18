@@ -16,7 +16,11 @@ export const postNoticeSuccess = (data) => {
 export const fetchNotices = () => {
   return (dispatch) => {
     axios
-      .get("https://bphcsupportapi.herokuapp.com/notice/")
+      .get("https://bphcsupportapi.herokuapp.com/notice/user", {
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      })
       .then((res) => {
         dispatch(fetchNoticesSuccess(res.data));
       })
