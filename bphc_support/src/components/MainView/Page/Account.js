@@ -62,7 +62,6 @@ function Account() {
     axios
       .get("https://bphcsupportapi.herokuapp.com/student/" + user.result.email)
       .then((res) => {
-        console.log("axios");
         setname(res.data[0].name != undefined ? res.data[0].name : "");
         setemail(res.data[0].email != undefined ? res.data[0].email : "");
         sethostel(res.data[0].bhawan != undefined ? res.data[0].bhawan : "");

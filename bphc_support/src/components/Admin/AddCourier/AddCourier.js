@@ -12,6 +12,7 @@ import useStyles from "./AddCourier.styles";
 import { postCourier } from "../../../redux/courierActions";
 
 function AddCourier({ currentId, setCurrentId }) {
+  const states = useSelector((state) => state);
   const [postData, setPostData] = useState({
     creator: "",
     title: "",
@@ -35,15 +36,6 @@ function AddCourier({ currentId, setCurrentId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(postCourier());
-    {
-      /*if (currentId === 0) {
-      dispatch(createPost(postData));
-      clear();
-    } else {
-      dispatch(updatePost(currentId, postData));
-      clear();
-    }*/
-    }
   };
 
   return (

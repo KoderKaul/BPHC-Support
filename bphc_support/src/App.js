@@ -21,15 +21,21 @@ function App() {
     <div className={classes.App}>
       <Switch>
         <Route exact path="/admin/courier">
-          <Sidebar type="student" />
+          <Sidebar type="admin" />
           <div className={classes.MainView}>
             <Header />
-            <Couriers />
+            <Couriers type="admin" />
           </div>
         </Route>
-
+        <Route exact path="/admin/problem">
+          <Sidebar type="admin" />
+          <div className={classes.MainView}>
+            <Header title="Problems" />
+            <History type="admin" />
+          </div>
+        </Route>
         <Route exact path="/admin/notice">
-          <Sidebar type="student" />
+          <Sidebar type="admin" />
           <div className={classes.MainView}>
             <Header />
             <AddNotices />
@@ -59,6 +65,13 @@ function App() {
           <div className={classes.MainView}>
             <Header title="Complaint" />
             <Complaint />
+          </div>
+        </Route>
+        <Route exact path="/courier">
+          <Sidebar type="student" />
+          <div className={classes.MainView}>
+            <Header />
+            <Couriers />
           </div>
         </Route>
         <Route exact path="/home">

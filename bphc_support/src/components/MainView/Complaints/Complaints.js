@@ -8,7 +8,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Complaint from "./Complaint/Complaint";
 import { makeStyles } from "@material-ui/core/styles";
-import { fetchProblems } from "../../../redux/problemActions";
+import { fetchAllProblems, fetchProblems } from "../../../redux/problemActions";
+import { loginSuccess } from "../../../redux/authActions";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -28,16 +29,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Complaints = ({ setCurrentId }) => {
+const Complaints = (props) => {
   const problems = useSelector((state) => state.problem.problems);
   const classes = useStyles();
-  //   console.log(problems);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchProblems());
-    // return () => {
-    //         cleanup
-    // }; I dont need to cleanup i.e closing function
+    if (props.type == "admin") {
+      console.log("hello");
+      dispatch(fetchAllProblems());
+    } else dispatch(fetchProblems());
   }, [dispatch]);
   return !problems.length ? (
     <CircularProgress />

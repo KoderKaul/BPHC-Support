@@ -10,7 +10,7 @@ import {
   Container,
   Typography,
 } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import signin from "./signin.svg";
 import googleicon from "../../img/google-icon.svg";
@@ -19,15 +19,35 @@ import useStyles from "./Login.styles";
 import { useHistory } from "react-router-dom";
 import { loginSuccess } from "../../redux/authActions";
 import axios from "axios";
+import { fetchUserInfo } from "../../redux/userActions";
 
 function Login() {
+  const states = useSelector((state) => state);
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const history = useHistory();
-  const submitForm = () => {};
+  const submitForm = (e) => {
+    e.preventDefault();
+    axios
+      .post("https://bphcsupportapi.herokuapp.com/admin/login", {
+        email: email,
+      })
+      .then((res) => {
+        console.log(res.data);
+        console.log("states", states);
+        localStorage.setItem("token", res.data.token);
+
+        dispatch(fetchUserInfo("admin", email));
+
+        history.push("/admin");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
 
   const googleSuccess = async (response) => {
     console.log(response);
@@ -36,6 +56,7 @@ function Login() {
     //login
     try {
       dispatch(loginSuccess(result, token));
+      //       dispatch(fetchUserInfo("student", result.email));
       axios
         .post("https://bphcsupportapi.herokuapp.com/student/login", {
           email: result.email,
@@ -94,7 +115,7 @@ function Login() {
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="off"
+                // autoComplete="off"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />

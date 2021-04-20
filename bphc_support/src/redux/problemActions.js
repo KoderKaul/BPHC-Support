@@ -16,12 +16,15 @@ export const postProblemSuccess = (data) => {
 export const fetchProblems = () => {
   return (dispatch) => {
     axios
-      .get("https://bphcsupportapi.herokuapp.com/problem/user/", {
-        email: JSON.parse(localStorage.getItem("profile")).result.email,
-        headers: {
-          authorization: localStorage.getItem("token"),
-        },
-      })
+      .get(
+        "http://localhost:5000/problem/user/" +
+          JSON.parse(localStorage.getItem("profile")).result.email,
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
+      )
       .then((res) => {
         // console.log(res);
         dispatch(fetchProblemsSuccess(res.data));
@@ -29,6 +32,26 @@ export const fetchProblems = () => {
       .catch((error) => console.log(error.message));
   };
 };
+export const fetchAllProblems = (bhawan) => {
+  return (dispatch) => {
+    axios
+      .get(
+        "http://localhost:5000/problem/admin/" +
+          JSON.parse(localStorage.getItem("profile")).result.studentBhawan,
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res);
+        dispatch(fetchProblemsSuccess(res.data));
+      })
+      .catch((error) => console.log(error.message));
+  };
+};
+
 export const postProblem = (data) => {
   return (dispatch) => {
     axios

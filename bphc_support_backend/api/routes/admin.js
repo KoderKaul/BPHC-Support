@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const { check } = require("express-validator");
 
 const Admin = require("../models/admin");
-//changeLocalhost in problemActions,notice/courierActions,Login,Account
 
 router.post(
   "/signup",

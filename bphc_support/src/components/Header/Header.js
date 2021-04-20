@@ -25,10 +25,9 @@ function Header({ title }) {
   axios
     .get("https://bphcsupportapi.herokuapp.com/student/" + user.result.email)
     .then((res) => {
-      console.log("axios");
       setstudentImage(
-        res.data[0].studentImage != undefined
-          ? res.data[0].studentImage
+        res.data[0]?.studentImage != undefined
+          ? res.data[0]?.studentImage
           : user.result.imageUrl
       );
     })

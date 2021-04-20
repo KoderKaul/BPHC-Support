@@ -4,7 +4,7 @@ import AddCourier from "../Admin/AddCourier/AddCourier";
 import { Container, Grow, Grid } from "@material-ui/core";
 import useStyles from "./Couriers.styles";
 
-function Couriers() {
+function Couriers(props) {
   const classes = useStyles();
   return (
     <Grow in>
@@ -19,7 +19,7 @@ function Couriers() {
             <CourierDisplay />
           </Grid>
           <Grid item xs={12} md={5}>
-            <AddCourier />
+            {props.type == "admin" ? <AddCourier /> : null}
           </Grid>
         </Grid>
       </Container>

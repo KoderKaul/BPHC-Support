@@ -6,13 +6,14 @@ import Courier from "./Courier/Courier";
 import { fetchCouriers } from "../../../redux/courierActions";
 
 function CourierDisplay() {
-  const couriers = useSelector((state) => state.courier.couriers);
+  const states = useSelector((state) => state);
+  const couriers = states.courier.couriers;
   const classes = useStyles();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchCouriers());
+    console.log(states);
+    dispatch(fetchCouriers("f20180325@hyderabad.bits-pilani.ac.in"));
   }, [dispatch]);
-  console.log(couriers);
   return !couriers.length ? (
     <CircularProgress />
   ) : (

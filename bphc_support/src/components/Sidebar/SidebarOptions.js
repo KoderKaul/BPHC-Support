@@ -3,9 +3,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
 import ErrorIcon from "@material-ui/icons/Error";
 import TimelineRoundedIcon from "@material-ui/icons/TimelineRounded";
-import HomeIcon from "@material-ui/icons/Home";
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import NoteAddIcon from '@material-ui/icons/NoteAdd';
+import MailOutlineIcon from "@material-ui/icons/MailOutline";
 
 export const SidebarOptions = [
   {
@@ -33,15 +31,9 @@ export const SidebarOptions = [
     Icon: <ErrorIcon />,
   },
   {
-    Name: "AddNotice",
-    to: "/admin/notice",
+    Name: "Couriers",
+    to: "/courier",
     subMenuItems: [],
-    Icon: <NoteAddIcon />,
-  },
-  {
-    Name: "AddCourier",
-    to: "/admin/courier",
-    subMenuItems: [],
-    Icon: <MailOutlineIcon/>,
+    Icon: <MailOutlineIcon />,
   },
 ];

@@ -4,11 +4,9 @@ const mongoose = require("mongoose");
 const checkAuth = require("../middleware/check-auth");
 const { check } = require("express-validator");
 
-//changeLocalhost in problemActions,notice/courierActions,Login,Account
 const Courier = require("../models/courier");
 
 router.post("/", checkAuth, (req, res, next) => {
-  console.log(req.body);
   const courier = new Courier({
     _id: new mongoose.Types.ObjectId(),
     studentEmail: req.body.studentEmail,
@@ -30,12 +28,14 @@ router.post("/", checkAuth, (req, res, next) => {
   });
 });
 
+//changed body to params
 router.get(
-  "/user",
+  "/user/:email",
   [check("email").isEmail().normalizeEmail()],
   checkAuth,
   (req, res, next) => {
-    const email = req.userData.email;
+    const email = req.params.email;
+
     Courier.find({ studentEmail: email })
       .exec()
       .then((doc) => {
@@ -46,5 +46,16 @@ router.get(
       });
   }
 );
+
+router.get("/", (req, res, next) => {
+  Courier.find()
+    .exec()
+    .then((doc) => {
+      res.status(200).json(doc);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 module.exports = router;

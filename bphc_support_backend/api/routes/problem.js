@@ -5,7 +5,7 @@ const checkAuth = require("../middleware/check-auth");
 const { check } = require("express-validator");
 
 const Problem = require("../models/problem");
-//changeLocalhost in problemActions,notice/courierActions,Login,Account
+
 router.post("/", checkAuth, (req, res, next) => {
   const problem = new Problem();
 
@@ -31,8 +31,11 @@ router.post("/", checkAuth, (req, res, next) => {
   });
 });
 
-router.get("/user", checkAuth, (req, res, next) => {
-  const email = req.userData.email;
+// changed userData to params
+router.get("/user/:email", checkAuth, (req, res, next) => {
+  const email = req.params.email;
+
+  //console.log(req.params);
 
   Problem.find({ studentEmail: email })
     .exec()
@@ -44,10 +47,11 @@ router.get("/user", checkAuth, (req, res, next) => {
     });
 });
 
-router.get("/admin", checkAuth, (req, res, next) => {
-  const bhawan = req.body.bhawan;
+// changed body to params
+router.get("/admin/:bhawan", checkAuth, (req, res, next) => {
+  const bhawan = req.params.bhawan;
 
-  Problem.find({ bhawan: bhawan })
+  Problem.find({ studentBhawan: bhawan })
     .exec()
     .then((doc) => {
       res.status(200).json(doc);

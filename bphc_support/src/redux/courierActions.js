@@ -16,12 +16,15 @@ export const postCourierSuccess = (data) => {
 export const fetchCouriers = () => {
   return (dispatch) => {
     axios
-      .get("http://localhost:5000/courier/user", {
-        email: JSON.parse(localStorage.getItem("profile")).result.email,
-        headers: {
-          authorization: localStorage.getItem("token"),
-        },
-      })
+      .get(
+        "http://localhost:5000/courier/user/" +
+          JSON.parse(localStorage.getItem("profile")).result.email,
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
+      )
       .then((res) => {
         dispatch(fetchCouriersSuccess(res.data));
       })
@@ -32,7 +35,7 @@ export const postCourier = (data) => {
   return (dispatch) => {
     axios
       .post(
-        "http://localhost:5000/courier/",
+        "https://bphcsupportapi.herokuapp.com/courier/",
         {
           studentEmail: JSON.parse(localStorage.getItem("profile")).result
             .email,
