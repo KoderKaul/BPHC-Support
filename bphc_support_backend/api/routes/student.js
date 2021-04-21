@@ -5,10 +5,12 @@ const jwt_token = require("jsonwebtoken");
 const { check } = require('express-validator');
 
 const Student = require("../models/student");
+const checkAuth = require('../middleware/check-auth');
 
 router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
 
   const email = req.body.email;
+  //console.log(email);    // ***********
     Student.find({email: email})
     .exec()
     .then(docs =>
@@ -17,6 +19,13 @@ router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, ne
             {
                 const student = new Student();
 
+                student["email"]="";
+                student["idNo"]="";
+                student["name"]="";
+                student["bhawan"]="";
+                student["roomNo"]="";
+                student["phoneNo"]="";
+                student["studentImage"]="";
 
                 student["_id"]=new mongoose.Types.ObjectId();
                 for(var attr in req.body)
@@ -154,7 +163,7 @@ router.get('/', (req, res,next) => {
 
 });
 
-router.patch('/:email', (req, res, next) => {
+router.patch('/:email', checkAuth, (req, res, next) => {
 
   const email = req.params.email;
 
@@ -163,6 +172,7 @@ router.patch('/:email', (req, res, next) => {
   for(var attr in req.body)
   {
     student[attr]=req.body[attr];
+    console.log(student[attr]);
   }
 
   Student.updateOne({email: email},{$set: student})
@@ -176,4 +186,6 @@ router.patch('/:email', (req, res, next) => {
   );
 
 });
+
+
 module.exports = router

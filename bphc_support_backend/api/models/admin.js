@@ -6,6 +6,7 @@ const adminSchema = mongoose.Schema(
         email: String,
         name: String,
         bhawan: String,
+        password: String,
         adminImage: String
     }
 );

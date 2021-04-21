@@ -9,7 +9,8 @@ const noticeSchema = mongoose.Schema(
         noticeImage: String,
         noticeDate: String,
         issuedBy: String,
-        eventTiming: String
+        eventTiming: String,
+        bhawan: String
     }
 );
 

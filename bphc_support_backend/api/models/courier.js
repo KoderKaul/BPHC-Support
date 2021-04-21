@@ -7,7 +7,8 @@ const courierSchema = mongoose.Schema(
         studentEmail: String,
         bhawan: String,
         roomNo: Number,
-        courierDesc: String
+        courierDesc: String,
+        courierDate: String
     }
 );
 
