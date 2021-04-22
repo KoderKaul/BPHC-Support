@@ -9,15 +9,14 @@ const Courier = require("../models/courier");
 
 router.post('/', checkAuth,(req, res, next) => {
 
-    const courier = new Courier(
-        {
-            _id: new mongoose.Types.ObjectId(),
-            studentEmail: req.body.studentEmail,
-            studentName: req.body.studentName,
-            courierDate: new Date()
-        }
+    const courier = new Courier();
 
-    );
+    courier["_id"] = new mongoose.Types.ObjectId();
+    courier["courierDesc"] = new Date();
+    for(var attr in req.body)
+    {
+      courier[attr]=req.body[attr];
+    }
 
     courier.save()
     .then(result =>{

@@ -10,7 +10,6 @@ const checkAuth = require('../middleware/check-auth');
 router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
 
   const email = req.body.email;
-  //console.log(email);    // ***********
     Student.find({email: email})
     .exec()
     .then(docs =>

@@ -20,7 +20,6 @@ router.post('/', checkAuth,(req, res, next) => {
     problem["studentRoomNo"]="";
     problem["studentBhawan"]="";
     problem["problemStatus"]="";
-    problem["problemDate"]="";
 
     problem["_id"]=new mongoose.Types.ObjectId();
     problem["problemDate"]=new Date();

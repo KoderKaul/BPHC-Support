@@ -4,7 +4,7 @@
   "description": "testing the apis",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --exit appTest.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "author": "vatsayayn binay",
@@ -15,15 +15,10 @@
     "express-validator": "^6.10.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.3",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "sanitize": "^2.1.0"
   },
   "engines": {
     "node": "14.15.5"
-  },
-  "devDependencies": {
-    "chai": "^4.3.4",
-    "chai-http": "^4.3.0",
-    "mocha": "^8.3.2",
-    "should": "^13.2.3"
   }
 }

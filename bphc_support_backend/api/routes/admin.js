@@ -3,13 +3,14 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const jwt = require("jsonwebtoken");
 const { check } = require('express-validator');
+const sanitizer = require('sanitize')();
 
 const Admin = require("../models/admin");
 const checkAuth = require('../middleware/check-auth');
 
 router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
 
-  const email = req.body.email;
+  const email = sanitizer.value(req.body.email,String);
 
     Admin.find({email: email})
     .exec()

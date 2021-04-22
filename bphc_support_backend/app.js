@@ -41,12 +41,14 @@ const adminRoutes = require("./api/routes/admin");
 const problemRoutes = require("./api/routes/problem");
 const courierRoutes = require("./api/routes/courier");
 const noticeRoutes = require("./api/routes/notice");
+const dashboardRoutes = require("./api/routes/dashboard");
 
 app.use('/student',studentRoutes);
 app.use('/admin',adminRoutes);
 app.use('/problem',problemRoutes);
 app.use('/courier',courierRoutes);
 app.use('/notice',noticeRoutes);
+app.use('/dashboard',dashboardRoutes);
 
 
 
