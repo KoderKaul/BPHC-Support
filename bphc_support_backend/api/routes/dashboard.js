@@ -44,30 +44,12 @@ router.post('/loggedin', (req,res,next) => {
 
 router.post('/loggedout', (req,res,next) => {
 
-    Dashboard.find()
-    .exec()
-    .then(doc=>{
-
+    Dashboard.find().exec().then(doc=>{
         var loggedIn = doc[0].loggedIn;
-        const dashboard = new Dashboard();
-        dashboard["loggedIn"]=loggedIn-1;
+        const dashboards = new Dashboard();
+        dashboards["loggedIn"]=loggedIn-1;
 
-        Dashboard.updateOne({loggedIn: loggedIn},{$set: dashboard})
-        .exec()
-        .then(result =>{
-            res.status(200).json(result);
-          })
-          .catch(err => {
-            console.log(err);
-          }
-          );
-    })
-    .catch(err => {
-        console.log(err);
-    }
-    );
-
-});
+        Dashboard.updateOne({loggedIn: loggedIn},{$set: dashboards}).exec().then(result =>{res.status(200).json(result);}).catch(err => {console.log(err);});}).catch(err => {console.log(err);});});
 
 router.post('/signedup', (req,res,next) => {
 
