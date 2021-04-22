@@ -53,8 +53,6 @@ router.get('/user/:email', checkAuth, (req, res,next) => {
   
   const email = sanitizer.value(req.params.email,String);
 
-  //console.log(req.params);
-
   Problem.find({studentEmail: email})
   .exec()
   .then(doc =>{

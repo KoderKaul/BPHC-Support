@@ -106,31 +106,14 @@ router.post('/login/pwd', [check('email').isEmail().normalizeEmail()],(req, res,
   const email = sanitizer.value(req.body.email,String);
   const password = sanitizer.value(req.body.password,String);
 
-  /*const today = new Date();
-  const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);*/
-
   Admin.find({email: email,password: password})
   .exec()
-  .then(doc =>{
-    if(doc.length>0)
+  .then(docs =>{
+    if(docs.length>0)
     {
 
-      const token = jwt.sign(
-        {
-          email: email
-        }
-        ,"secret",
-        {
-          expiresIn: "2h"
-        }
-      );
-
-      res.status(200).json(
-        {
-          message: "Auth success",
-          token: token
-        }
-      );
+      const tokens = jwt.sign({email: email},"secret",{expiresIn: "2h"});res.status(200).json(
+        {message: "Auth success",token: tokens});
 
     } else {
       res.status(404).json(
