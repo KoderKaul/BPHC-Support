@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const checkAuth = require('../middleware/check-auth');
 const { check } = require('express-validator');
+const sanitizer = require('sanitize')();
 
 
 const Problem = require("../models/problem");
@@ -50,7 +51,7 @@ router.post('/', checkAuth,(req, res, next) => {
 // changed userData to params
 router.get('/user/:email', checkAuth, (req, res,next) => {
   
-  const email = req.params.email;
+  const email = sanitizer.value(req.params.email,String);
 
   //console.log(req.params);
 
@@ -70,7 +71,7 @@ router.get('/user/:email', checkAuth, (req, res,next) => {
 // changed body to params
 router.get('/admin/:bhawan', checkAuth, (req, res,next) => {
   
-  const bhawan = req.params.bhawan;
+  const bhawan = sanitizer.value(req.params.bhawan,String);
   
     Problem.find({studentBhawan: bhawan})
     .exec()

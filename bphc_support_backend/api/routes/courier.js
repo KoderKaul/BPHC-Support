@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const checkAuth = require('../middleware/check-auth');
 const { check } = require('express-validator');
+const sanitizer = require('sanitize')();
 
 
 const Courier = require("../models/courier");
@@ -40,7 +41,7 @@ router.post('/', checkAuth,(req, res, next) => {
 //changed body to params
 router.get('/user/:email',[check('email').isEmail().normalizeEmail()], checkAuth, (req, res,next) => {
   
-  const email = req.params.email;
+  const email = sanitizer.value(req.params.email,String);
 
   Courier.find({studentEmail: email})
   .exec()

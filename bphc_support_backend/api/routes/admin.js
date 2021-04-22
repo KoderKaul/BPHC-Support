@@ -65,7 +65,7 @@ router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, ne
 
 router.post('/login', [check('email').isEmail().normalizeEmail()],(req, res, next) => {
   
-  const email = req.body.email;
+  const email = sanitizer.value(req.body.email,String);
 
   Admin.find({email: email})
   .exec()
@@ -103,8 +103,8 @@ router.post('/login', [check('email').isEmail().normalizeEmail()],(req, res, nex
 
 router.post('/login/pwd', [check('email').isEmail().normalizeEmail()],(req, res, next) => {
   
-  const email = req.body.email;
-  const password = req.body.password;
+  const email = sanitizer.value(req.body.email,String);
+  const password = sanitizer.value(req.body.password,String);
 
   /*const today = new Date();
   const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);*/
@@ -172,7 +172,7 @@ router.delete('/:email', (req, res,next) => {
 
 router.get('/:email', (req, res,next) => {
   
-  const email = req.params.email;
+  const email = sanitizer.value(req.params.email,String);
 
   Admin.find({email: email})
   .exec()

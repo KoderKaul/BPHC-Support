@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const jwt_token = require("jsonwebtoken");
 const { check } = require('express-validator');
+const sanitizer = require('sanitize')();
 
 const Student = require("../models/student");
 const Admin = require("../models/admin");
@@ -110,7 +111,7 @@ router.get('/sidebar',(req,res,next)=>{
 
 router.get('/getdashboard/:bhawan', (req,res,next)=>{
     
-    const bhawan =req.params.bhawan;
+    const bhawan = sanitizer.value(req.params.bhawan,String);
 
     var num ={};
     var today = new Date();

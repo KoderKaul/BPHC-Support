@@ -3,13 +3,14 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const jwt_token = require("jsonwebtoken");
 const { check } = require('express-validator');
+const sanitizer = require('sanitize')();
 
 const Student = require("../models/student");
 const checkAuth = require('../middleware/check-auth');
 
 router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
 
-  const email = req.body.email;
+  const email = sanitizer.value(req.body.email,String);
     Student.find({email: email})
     .exec()
     .then(docs =>
@@ -76,7 +77,7 @@ router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, ne
 
 router.post('/login',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
   
-  const email = req.body.email;
+  const email = sanitizer.value(req.body.email,String);
 
   Student.find({email: email})
   .exec()
@@ -132,7 +133,7 @@ router.delete('/:email',(req, res,next) => {
 
 router.get('/:email', (req, res,next) => {
   
-  const email = req.params.email;
+  const email = sanitizer.value(req.params.email,String);
 
   Student.find({email: email})
   .exec()
