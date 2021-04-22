@@ -4,7 +4,7 @@
   "description": "testing the apis",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --exit appTest.js",
+    "test": "mocha --exit test/**/*.js",
     "start": "node server.js"
   },
   "author": "vatsayayn binay",
@@ -15,7 +15,8 @@
     "express-validator": "^6.10.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.3",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "sanitize": "^2.1.0"
   },
   "engines": {
     "node": "14.15.5"

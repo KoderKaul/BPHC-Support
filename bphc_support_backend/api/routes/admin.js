@@ -3,13 +3,14 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const jwt = require("jsonwebtoken");
 const { check } = require('express-validator');
+const sanitizer = require('sanitize')();
 
 const Admin = require("../models/admin");
 const checkAuth = require('../middleware/check-auth');
 
 router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, next) => {
 
-  const email = req.body.email;
+  const email = sanitizer.value(req.body.email,String);
 
     Admin.find({email: email})
     .exec()
@@ -64,7 +65,7 @@ router.post('/signup',[check('email').isEmail().normalizeEmail()], (req, res, ne
 
 router.post('/login', [check('email').isEmail().normalizeEmail()],(req, res, next) => {
   
-  const email = req.body.email;
+  const email = sanitizer.value(req.body.email,String);
 
   Admin.find({email: email})
   .exec()
@@ -102,8 +103,8 @@ router.post('/login', [check('email').isEmail().normalizeEmail()],(req, res, nex
 
 router.post('/login/pwd', [check('email').isEmail().normalizeEmail()],(req, res, next) => {
   
-  const email = req.body.email;
-  const password = req.body.password;
+  const email = sanitizer.value(req.body.email,String);
+  const password = sanitizer.value(req.body.password,String);
 
   /*const today = new Date();
   const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);*/
@@ -171,7 +172,7 @@ router.delete('/:email', (req, res,next) => {
 
 router.get('/:email', (req, res,next) => {
   
-  const email = req.params.email;
+  const email = sanitizer.value(req.params.email,String);
 
   Admin.find({email: email})
   .exec()

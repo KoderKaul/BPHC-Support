@@ -14,7 +14,6 @@ router.post('/', checkAuth,(req, res, next) => {
     notice["noticeSubTitle"]="";
     notice["noticeDesc"]="";
     notice["noticeImage"]="";
-    notice["noticeDate"]="";
     notice["issuedBy"]="";
     notice["eventTiming"]="";
 

@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const jwt_token = require("jsonwebtoken");
 const { check } = require('express-validator');
+const sanitizer = require('sanitize')();
 
 const Student = require("../models/student");
 const Admin = require("../models/admin");
@@ -110,23 +111,23 @@ router.get('/sidebar',(req,res,next)=>{
 
 router.get('/getdashboard/:bhawan', (req,res,next)=>{
     
-    const bhawan =req.params.bhawan;
+    const bhawan = sanitizer.value(req.params.bhawan,String);
 
     var num ={};
     var today = new Date();
     var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
 
-    Problem.find({studentBhawan: bhawan, problemDate: {"$gte": ISODate(lastWeek)}})
+    Problem.find({studentBhawan: bhawan, problemDate: {"$gte": new Date(lastWeek)}})
     .exec()
     .then(result=>{
         num["problem"]=result.length;
 
-        Notice.find({bhawan: bhawan, noticeDate: {"$gte": ISODate(lastWeek)}})
+        Notice.find({bhawan: bhawan, noticeDate: {"$gte": new Date(lastWeek)}})
         .exec()
         .then(result1=>{
             num["notice"] = result1.length;
 
-            Courier.find({bhawan: bhawan, courierDate: {"$gte": ISODate(lastWeek)}})
+            Courier.find({bhawan: bhawan, courierDate: {"$gte": new Date(lastWeek)}})
             .exec()
             .then(result2=>{
                 num["courier"] = result2.length;
@@ -152,6 +153,58 @@ router.get('/getdashboard/:bhawan', (req,res,next)=>{
     
 });
 
+router.post('/mock', (req, res, next) => {
+    
+    const json = require('./MOCK_DATA.json');
+
+    var arr = ["random","ram","krishna","gautam","vishwakarma","gandhi","shankar","meera","valmiki","buddh"];
+
+    for(var i=0;i<json.length;i++)
+    {
+        const student = new Student();
+        for(var attr in json[i])
+        {
+            student[attr]=json[i][attr];
+        }
+        student["_id"] = new mongoose.Types.ObjectId();
+        var x = Math.floor((Math.random() * arr.length));
+        student["bhawan"] = arr[x];
+        /*var num ={};
+        var today = new Date();
+        var num = Math.floor((Math.random() * 20));
+        courier["courierDate"]=new Date(today.getFullYear(), today.getMonth(), today.getDate() - num);*/
+        student["studentImage"]="";
+
+        student.save()
+        .then(result =>{
+            //console.log(result);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+       
+
+    }
+
+    res.status(200).json({"message": "data uploaded"});
+
+    /*Student.remove({email: email})
+    .exec()
+    .then(
+        res.status(200).json(
+        {
+            message: "student deleted"
+        }
+        )
+    )
+    .catch(err => {
+        console.log(err);
+    }
+    );*/
+
+
+});
 
 
 
