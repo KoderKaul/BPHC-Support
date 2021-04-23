@@ -56,6 +56,24 @@ router.get('/user/:email',[check('email').isEmail().normalizeEmail()], checkAuth
 
 });
 
+
+router.get('/admin/:bhawan', checkAuth, (req, res,next) => {
+  
+  const bhawan = sanitizer.value(req.params.bhawan,String);
+
+  Courier.find({bhawan: bhawan})
+  .exec()
+  .then(doc =>{
+    res.status(200).json(doc);
+  }
+  )
+  .catch(err => {
+    console.log(err);
+  }
+  );
+
+});
+
 router.get('/', (req, res,next) => {
   
   Courier.find()

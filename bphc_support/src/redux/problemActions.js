@@ -17,7 +17,7 @@ export const fetchProblems = () => {
   return (dispatch) => {
     axios
       .get(
-        "http://localhost:5000/problem/user/" +
+        "https://bphcsupportapi.herokuapp.com/problem/user/" +
           JSON.parse(localStorage.getItem("profile")).result.email,
         {
           headers: {
@@ -36,7 +36,7 @@ export const fetchAllProblems = (bhawan) => {
   return (dispatch) => {
     axios
       .get(
-        "http://localhost:5000/problem/admin/" +
+        "https://bphcsupportapi.herokuapp.com/problem/admin/" +
           JSON.parse(localStorage.getItem("profile")).result.studentBhawan,
         {
           headers: {

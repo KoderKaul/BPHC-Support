@@ -11,7 +11,7 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
-
+import moment from "moment";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
@@ -56,7 +56,7 @@ export default function Complaint({ problem }) {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            PP
+            {problem.studentBhawan[0]}
           </Avatar>
         }
         action={
@@ -65,11 +65,13 @@ export default function Complaint({ problem }) {
           </IconButton>
         }
         title={problem.problemCategory}
-        subheader="February 7, 2021"
+        subheader={moment(problem.problemDate).format(
+          "dddd, MMMM Do YYYY, h:mm:ss a"
+        )}
       />
       <CardMedia
         className={classes.media}
-        image="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2017/02/13/547903-hostel-mess-food-021217.jpg"
+        image="https://www.integrify.com/site/assets/files/2411/complaint-handling-software.jpg"
         title="Mess Query"
       />
       <CardContent>
@@ -99,7 +101,10 @@ export default function Complaint({ problem }) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-            Status: <b className={classes.active}>Accepted</b>
+            Status:{" "}
+            <b className={classes.active}>
+              {problem.problemStatus.toUpperCase()}
+            </b>
           </Typography>
         </CardContent>
       </Collapse>

@@ -6,7 +6,7 @@ import MailOutlineIcon from "@material-ui/icons/MailOutline";
 export const SidebarOptionsAdmin = [
   {
     Name: "Dashboard",
-    to: "/admin/home",
+    to: "/admin",
     subMenuItems: [],
     Icon: <DashboardIcon />,
   },

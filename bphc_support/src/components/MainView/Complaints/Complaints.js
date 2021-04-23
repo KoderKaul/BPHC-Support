@@ -37,19 +37,35 @@ const Complaints = (props) => {
     if (props.type == "admin") {
       console.log("hello");
       dispatch(fetchAllProblems());
-    } else dispatch(fetchProblems());
-  }, [dispatch]);
+    }
+    if (props.type == "student") dispatch(fetchProblems());
+  }, []);
   return !problems.length ? (
     <CircularProgress />
   ) : (
     <Container className={classes.main}>
       <CssBaseline />
       <Grid container spacing={3}>
-        {problems.map((problem) => (
-          <Grid key={problem._id} item xs={12} sm={6} lg={4}>
-            <Complaint problem={problem} />
-          </Grid>
-        ))}
+        {props.type == "student"
+          ? problems
+              .slice(0)
+              .reverse()
+              .map((problem) => (
+                <Grid key={problem._id} item xs={12} sm={6} lg={4}>
+                  <Complaint problem={problem} />
+                </Grid>
+              ))
+          : props.type == "admin"
+          ? problems
+              .slice(0)
+              .reverse()
+              .filter((problem) => problem.problemStatus == "pending")
+              .map((problem) => (
+                <Grid key={problem._id} item xs={12} sm={6} lg={4}>
+                  <Complaint problem={problem} />
+                </Grid>
+              ))
+          : ""}
       </Grid>
     </Container>
   );

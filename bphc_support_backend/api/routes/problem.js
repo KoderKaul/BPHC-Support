@@ -101,6 +101,30 @@ router.get('/admin/:bhawan', checkAuth, (req, res,next) => {
 
 });
 
+router.patch('/:id', checkAuth, (req, res, next) => {
+
+  const id = req.params.id;
+
+  const problem = new Problem();
+
+  for(var attr in req.body)
+  {
+    problem[attr]=req.body[attr];
+    //console.log(student[attr]);
+  }
+
+  Problem.updateOne({_id: id},{$set: problem})
+  .exec()
+  .then(result =>{
+    res.status(200).json(result);
+  })
+  .catch(err => {
+    console.log(err);
+  }
+  );
+
+});
+
 
 
 

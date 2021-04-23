@@ -14,7 +14,6 @@ import note_bg from "../../../../img/jared.jpg";
 
 function Courier(courier) {
   const classes = useStyles();
-
   return (
     <div className={classes.mainContainer}>
       <Card className={classes.courierContainer}>
@@ -24,7 +23,7 @@ function Courier(courier) {
           title="Courier Title"
         />
         <div className={classes.overlay}>
-          <Typography variant="h6">Courier Room</Typography>
+          <Typography variant="h6">{courier.courier.bhawan[0].toUpperCase()}{courier.courier.roomNo}</Typography>
         </div>
         <Typography
           className={classes.overlay2}
@@ -50,18 +49,9 @@ function Courier(courier) {
             component="p"
             className={classes.details}
           >
-            Courier Note 2
+            {courier.courier.courierDesc}
           </Typography>
         </CardContent>
-        <CardActions className={classes.cardActions}>
-          <Button size="small" color="primary">
-            <EditIcon fontSize="small" /> Edit
-          </Button>
-
-          <Button size="small" color="primary">
-            <DeleteIcon fontSize="small" /> Delete
-          </Button>
-        </CardActions>
       </Card>
     </div>
   );

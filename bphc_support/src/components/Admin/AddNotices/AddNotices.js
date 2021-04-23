@@ -46,7 +46,6 @@ function AddNotices() {
       <Paper className={classes.paper}>
         <form
           autoComplete="off"
-          noValidate
           className={`${classes.root} ${classes.form}`}
           onSubmit={handleSubmit}
         >
@@ -56,6 +55,7 @@ function AddNotices() {
             variant="outlined"
             label="Notice Title"
             fullWidth
+            required={true}
             value={postNoticeData.noticeTitle}
             onChange={(e) =>
               setPostNoticeData({
@@ -69,6 +69,7 @@ function AddNotices() {
             variant="outlined"
             label="Notice SubTitle"
             fullWidth
+            required={true}
             value={postNoticeData.noticeSubTitle}
             onChange={(e) =>
               setPostNoticeData({
@@ -84,7 +85,7 @@ function AddNotices() {
             label="Event Date"
             InputLabelProps={{ shrink: true }}
             fullWidth
-            required
+            required={true}
             type="date"
             value={postNoticeData.eventTiming}
             onChange={(e) =>
@@ -100,6 +101,7 @@ function AddNotices() {
             label="Notice Description"
             fullWidth
             multiline
+            required={true}
             rows={4}
             value={postNoticeData.noticeDesc}
             onChange={(e) =>
@@ -114,6 +116,7 @@ function AddNotices() {
             variant="outlined"
             label="Issued By"
             fullWidth
+            required={true}
             value={postNoticeData.noticeIssuedBy}
             onChange={(e) =>
               setPostNoticeData({

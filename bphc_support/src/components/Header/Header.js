@@ -14,34 +14,45 @@ import { useHistory, useLocation } from "react-router-dom";
 import { logoutAction } from "../../redux/authActions";
 import axios from "axios";
 
-function Header({ title }) {
+function Header({ title, type }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  console.log(user);
   const [studentImage, setstudentImage] = useState("");
   //   console.log(user);
-  axios
-    .get("https://bphcsupportapi.herokuapp.com/student/" + user.result.email)
-    .then((res) => {
-      setstudentImage(
-        res.data[0]?.studentImage != undefined
-          ? res.data[0]?.studentImage
-          : user.result.imageUrl
-      );
-    })
-    .catch((error) => console.log(error.message));
   useEffect(() => {
-    const token = user?.token;
-
+    async function loadContent() {
+      await axios
+        .get(
+          "https://bphcsupportapi.herokuapp.com/" +
+            type +
+            "/" +
+            user.result?.email
+        )
+        .then((res) => {
+          setstudentImage(
+            res.data[0]?.studentImage != undefined
+              ? res.data[0]?.studentImage
+              : user.result.imageUrl
+          );
+        })
+        .catch((error) => console.log(error.message));
+    }
+    loadContent();
+  }, []);
+  useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
   //logout
   const handleLogout = () => {
     dispatch(logoutAction());
+    axios.post("https://bphcsupportapi.herokuapp.com/dashboard/loggedout");
     history.push("/");
     setUser(null);
+    localStorage.setItem("token", null);
   };
 
   return (
@@ -62,7 +73,7 @@ function Header({ title }) {
                 {user ? (
                   <div className={classes.userDetail}>
                     <Typography variant="body1" className={classes.Title}>
-                      Welcome, {user.result.name}
+                      Welcome, {user.result?.name}
                     </Typography>
                     <Avatar src={studentImage}></Avatar>
                     <IconButton

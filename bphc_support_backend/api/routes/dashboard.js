@@ -161,21 +161,29 @@ router.post('/mock', (req, res, next) => {
 
     for(var i=0;i<json.length;i++)
     {
-        const student = new Student();
+        const problem = new Problem();
         for(var attr in json[i])
         {
-            student[attr]=json[i][attr];
+            problem[attr]=json[i][attr];
         }
-        student["_id"] = new mongoose.Types.ObjectId();
+        problem["_id"] = new mongoose.Types.ObjectId();
         var x = Math.floor((Math.random() * arr.length));
-        student["bhawan"] = arr[x];
-        /*var num ={};
+        problem["studentBhawan"] = arr[x];
+        var num ={};
         var today = new Date();
         var num = Math.floor((Math.random() * 20));
-        courier["courierDate"]=new Date(today.getFullYear(), today.getMonth(), today.getDate() - num);*/
-        student["studentImage"]="";
+        problem["noticeDate"]=new Date(today.getFullYear(), today.getMonth(), today.getDate() - num);
+        //notice["noticeImage"]="";
+        if(num%2==0)
+        {
+            problem["problemStatus"]="pending";
+        }
+        else
+        {
+            problem["problemStatus"]="solved";
+        }
 
-        student.save()
+        problem.save()
         .then(result =>{
             //console.log(result);
         })
@@ -189,7 +197,7 @@ router.post('/mock', (req, res, next) => {
 
     res.status(200).json({"message": "data uploaded"});
 
-    /*Student.remove({email: email})
+    /*Problem.remove()
     .exec()
     .then(
         res.status(200).json(

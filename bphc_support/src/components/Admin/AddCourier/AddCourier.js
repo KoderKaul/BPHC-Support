@@ -8,34 +8,40 @@ import {
 } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import FileBase from "react-file-base64";
-import useStyles from "./AddCourier.styles";
+import useStyles from "../AddNotices/AddNotices.styles";
 import { postCourier } from "../../../redux/courierActions";
 
 function AddCourier({ currentId, setCurrentId }) {
   const states = useSelector((state) => state);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [postData, setPostData] = useState({
-    creator: "",
-    title: "",
-    message: "",
-    tags: "",
+    studentName: "",
+    studentEmail: "",
+    bhawan: user.result.studentBhawan,
+    roomNo: "",
     selectedFile: "",
+    courierDesc: "",
   });
   const dispatch = useDispatch();
   const classes = useStyles();
 
   const clear = () => {
     setPostData({
-      creator: "",
-      title: "",
-      message: "",
-      tags: "",
+      studentName: "",
+      studentEmail: "",
+      bhawan: user.result.studentBhawan,
+      roomNo: "",
       selectedFile: "",
+      courierDesc: "",
     });
   };
 
   const handleSubmit = async (e) => {
+    console.log("clicked");
     e.preventDefault();
-    dispatch(postCourier());
+    dispatch(postCourier(postData));
+
+    clear();
   };
 
   return (
@@ -43,62 +49,65 @@ function AddCourier({ currentId, setCurrentId }) {
       <Paper className={classes.paper}>
         <form
           autoComplete="off"
-          noValidate
           className={`${classes.root} ${classes.form}`}
           onSubmit={handleSubmit}
         >
           <Typography variant="h6">Add Courier</Typography>
           <TextField
-            name="creator"
+            name="StudentName"
             variant="outlined"
-            label="Creator"
+            label="StudentName"
             fullWidth
-            value={postData.creator}
+            required={true}
+            value={postData.studentName}
             onChange={(e) =>
-              setPostData({ ...postData, creator: e.target.value })
+              setPostData({ ...postData, studentName: e.target.value })
             }
           />
           <TextField
-            name="title"
+            name="StudentEmail"
             variant="outlined"
-            label="Title"
+            label="StudentEmail"
             fullWidth
+            required={true}
             value={postData.title}
             onChange={(e) =>
-              setPostData({ ...postData, title: e.target.value })
+              setPostData({ ...postData, studentEmail: e.target.value })
             }
           />
           <TextField
-            name="message"
+            name="courierDesc"
             variant="outlined"
-            label="Message"
+            label="CourierDescription"
             fullWidth
             multiline
+            required={true}
             rows={4}
             value={postData.message}
             onChange={(e) =>
-              setPostData({ ...postData, message: e.target.value })
+              setPostData({ ...postData, courierDesc: e.target.value })
             }
           />
           <TextField
-            name="tags"
+            name="RoomNo."
             variant="outlined"
-            label="Tags (coma separated)"
+            label="RoomNo."
             fullWidth
-            value={postData.tags}
+            required={true}
+            value={postData.roomNo}
             onChange={(e) =>
-              setPostData({ ...postData, tags: e.target.value.split(",") })
+              setPostData({ ...postData, roomNo: e.target.value })
             }
           />
-          <div className={classes.fileInput}>
-            <FileBase
-              type="file"
-              multiple={false}
-              onDone={({ base64 }) =>
-                setPostData({ ...postData, selectedFile: base64 })
-              }
-            />
-          </div>
+          <TextField
+            name="Bhawan"
+            variant="outlined"
+            label="Bhawan"
+            fullWidth
+            disabled
+            required={true}
+            value={postData.bhawan}
+          />
           <Button
             className={classes.buttonSubmit}
             variant="contained"

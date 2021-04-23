@@ -63,23 +63,22 @@ function Form() {
   const classes = useStyles();
 
   const [postComplaintData, setPostComplaintData] = useState({
-    studentName: "",
+    studentName: JSON.parse(localStorage.getItem("profile")).result.name,
     studentId: "",
     studentRoomNo: "",
     studentBhawan: "",
-    studentEmail: "",
+    studentEmail: JSON.parse(localStorage.getItem("profile")).result.email,
     problemTitle: "",
     problemCategory: "",
     problemDesc: "",
+    problemStatus: "pending",
   });
 
   const clear = () => {
     setPostComplaintData({
-      studentName: "",
       studentId: "",
       studentRoomNo: "",
       studentBhawan: "",
-      studentEmail: "",
       problemTitle: "",
       problemCategory: "",
       problemDesc: "",
@@ -111,13 +110,8 @@ function Form() {
                 id="name"
                 label="Name"
                 autoFocus
-                value={postComplaintData.studentName}
-                onChange={(event) =>
-                  setPostComplaintData({
-                    ...postComplaintData,
-                    studentName: event.target.value,
-                  })
-                }
+                value={JSON.parse(localStorage.getItem("profile")).result.name}
+                disabled
                 className={classes.textfield}
                 InputProps={{
                   className: classes.input,
@@ -131,7 +125,7 @@ function Form() {
                 InputProps={{
                   className: classes.input,
                 }}
-                autoComplete="id"
+                autoComplete
                 name="id"
                 variant="outlined"
                 required={true}
@@ -154,7 +148,6 @@ function Form() {
                 InputProps={{
                   className: classes.input,
                 }}
-                autoComplete="room-number"
                 name="room-number"
                 variant="outlined"
                 required={true}
@@ -167,6 +160,7 @@ function Form() {
                     studentRoomNo: event.target.value,
                   })
                 }
+                autocomplete
                 id="room-number"
                 label="Room Number"
               />
@@ -184,6 +178,7 @@ function Form() {
                 InputLabelProps={{ shrink: true }}
                 label="Hostel Name"
                 value={postComplaintData.studentBhawan}
+                autoComplete
                 onChange={(event) =>
                   setPostComplaintData({
                     ...postComplaintData,
@@ -210,13 +205,8 @@ function Form() {
                 id="email"
                 InputLabelProps={{ shrink: true }}
                 label="Email Address"
-                value={postComplaintData.studentEmail}
-                onChange={(event) =>
-                  setPostComplaintData({
-                    ...postComplaintData,
-                    studentEmail: event.target.value,
-                  })
-                }
+                value={JSON.parse(localStorage.getItem("profile")).result.email}
+                disabled
                 name="email"
                 autoComplete="email"
               />

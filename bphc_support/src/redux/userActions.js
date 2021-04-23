@@ -6,9 +6,10 @@ export const fetchUserSuccess = (data) => {
     payload: data,
   };
 };
-export const fetchUserInfo = (type, email) => {
+export const fetchUserInfo =    (type, email) => {
   return (dispatch) =>
-    axios.get("http://localhost:5000/" + type + "/" + email).then((res) => {
+    axios.get("https://bphcsupportapi.herokuapp.com/" + type + "/" + email).then((res) => {
+        console.log(res.data[0]);
       localStorage.setItem(
         "profile",
         JSON.stringify({

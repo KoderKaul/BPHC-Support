@@ -16,7 +16,7 @@ function Couriers(props) {
           spacing={1}
         >
           <Grid item xs={12} md={7}>
-            <CourierDisplay />
+            <CourierDisplay type={props.type} />
           </Grid>
           <Grid item xs={12} md={5}>
             {props.type == "admin" ? <AddCourier /> : null}

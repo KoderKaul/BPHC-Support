@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchNotices } from "../../../redux/noticeActions";
 
 function MainView() {
-
   const classes = useStyles();
   const notices = useSelector((state) => state.notice.notices);
   const dispatch = useDispatch();
@@ -18,9 +17,12 @@ function MainView() {
     <CircularProgress />
   ) : (
     <div className={classes.main}>
-      {notices.map((notice) => (
-        <Notice notice={notice} />
-      ))}
+      {notices
+        .slice(0)
+        .reverse()
+        .map((notice, index) => (
+          <Notice notice={notice} key={index} />
+        ))}
     </div>
   );
 }

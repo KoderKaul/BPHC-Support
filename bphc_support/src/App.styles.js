@@ -15,7 +15,6 @@ export default makeStyles((theme) => ({
     "&::-webkit-scrollbar": {
       display: "none",
     },
-    
   },
   Login: {
     width: "100%",

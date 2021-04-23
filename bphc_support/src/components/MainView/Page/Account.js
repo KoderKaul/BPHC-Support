@@ -77,12 +77,15 @@ function Account() {
     console.log(phone);
     axios
       .patch(
-        "https://bphcsupportapi.herokuapp.com/student/" + user.result.email,
-        {
+        "https://bphcsupportapi.herokuapp.com/student/" + user.result.email,{
           bhawan: hostel,
           roomNo: room,
           phoneNo: phone,
           studentImage: studentImage,
+        },{
+            headers: {
+                authorization: localStorage.getItem("token"),
+              },
         }
       )
       .then((res) => {

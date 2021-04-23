@@ -32,12 +32,11 @@ function Login() {
   const submitForm = (e) => {
     e.preventDefault();
     axios
-      .post("https://bphcsupportapi.herokuapp.com/admin/login", {
+      .post("https://bphcsupportapi.herokuapp.com/admin/login/pwd", {
         email: email,
+        password: password,
       })
       .then((res) => {
-        console.log(res.data);
-        console.log("states", states);
         localStorage.setItem("token", res.data.token);
 
         dispatch(fetchUserInfo("admin", email));
@@ -56,7 +55,6 @@ function Login() {
     //login
     try {
       dispatch(loginSuccess(result, token));
-      //       dispatch(fetchUserInfo("student", result.email));
       axios
         .post("https://bphcsupportapi.herokuapp.com/student/login", {
           email: result.email,
@@ -65,6 +63,7 @@ function Login() {
           console.log("res:", res);
           localStorage.setItem("token", res.data.token);
           history.push("/home");
+          axios.post("https://bphcsupportapi.herokuapp.com/dashboard/loggedin");
         })
         .catch((err) => {
           console.log(err.message);
@@ -78,6 +77,18 @@ function Login() {
               console.log("res:", res);
               localStorage.setItem("token", res.data.token);
               history.push("/home");
+              axios
+                .post("https://bphcsupportapi.herokuapp.com/dashboard/loggedin")
+                .then((res) => {})
+                .catch((err) => {
+                  console.log(err.message);
+                });
+              axios
+                .post("https://bphcsupportapi.herokuapp.com/dashboard/signedup")
+                .then((res) => {})
+                .catch((err) => {
+                  console.log(err.message);
+                });
             })
             .catch((err) => {
               console.log(err.message);
