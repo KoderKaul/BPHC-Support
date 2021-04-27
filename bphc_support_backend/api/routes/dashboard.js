@@ -153,67 +153,6 @@ router.get('/getdashboard/:bhawan', (req,res,next)=>{
     
 });
 
-router.post('/mock', (req, res, next) => {
-    
-    const json = require('./MOCK_DATA.json');
-
-    var arr = ["random","ram","krishna","gautam","vishwakarma","gandhi","shankar","meera","valmiki","buddh"];
-
-    for(var i=0;i<json.length;i++)
-    {
-        const problem = new Problem();
-        for(var attr in json[i])
-        {
-            problem[attr]=json[i][attr];
-        }
-        problem["_id"] = new mongoose.Types.ObjectId();
-        var x = Math.floor((Math.random() * arr.length));
-        problem["studentBhawan"] = arr[x];
-        var num ={};
-        var today = new Date();
-        var num = Math.floor((Math.random() * 20));
-        problem["noticeDate"]=new Date(today.getFullYear(), today.getMonth(), today.getDate() - num);
-        //notice["noticeImage"]="";
-        if(num%2==0)
-        {
-            problem["problemStatus"]="pending";
-        }
-        else
-        {
-            problem["problemStatus"]="solved";
-        }
-
-        problem.save()
-        .then(result =>{
-            //console.log(result);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-
-       
-
-    }
-
-    res.status(200).json({"message": "data uploaded"});
-
-    /*Problem.remove()
-    .exec()
-    .then(
-        res.status(200).json(
-        {
-            message: "student deleted"
-        }
-        )
-    )
-    .catch(err => {
-        console.log(err);
-    }
-    );*/
-
-
-});
-
 
 
 
