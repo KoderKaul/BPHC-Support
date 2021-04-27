@@ -12,7 +12,14 @@ import {
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import FileBase from "react-file-base64";
+import Snackbar from "@material-ui/core/Snackbar";
 import axios from "axios";
+import MuiAlert from "@material-ui/lab/Alert";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -58,6 +65,7 @@ function Account() {
   const [room, setroom] = useState("");
   const [phone, setphone] = useState("");
   const [studentImage, setstudentImage] = useState("");
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     axios
       .get("https://bphcsupportapi.herokuapp.com/student/" + user.result.email)
@@ -73,23 +81,39 @@ function Account() {
       })
       .catch((error) => console.log(error.message));
   }, []);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const saveData = () => {
     console.log(phone);
     axios
       .patch(
-        "https://bphcsupportapi.herokuapp.com/student/" + user.result.email,{
+        "https://bphcsupportapi.herokuapp.com/student/" + user.result.email,
+        {
           bhawan: hostel,
           roomNo: room,
           phoneNo: phone,
           studentImage: studentImage,
-        },{
-            headers: {
-                authorization: localStorage.getItem("token"),
-              },
+        },
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
         }
       )
       .then((res) => {
         console.log(res);
+        handleClick();
       })
       .catch((error) => console.log(error.message));
   };
@@ -203,6 +227,11 @@ function Account() {
             >
               Save Changes
             </Button>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success">
+                Profile Updated
+              </Alert>
+            </Snackbar>
           </Grid>
         </Grid>
       </Paper>

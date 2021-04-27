@@ -14,7 +14,7 @@ import {
   Table,
 } from "reactstrap";
 
-const Projects = () => {
+const Projects = ({ admin, courier, notice, problem }) => {
   return (
     /*--------------------------------------------------------------------------------*/
     /* Used In Dashboard-4 [General]                                                  */
@@ -42,111 +42,45 @@ const Projects = () => {
           <thead>
             <tr className="border-0">
               <th className="border-0">Managers</th>
-              <th className="border-0">Feedbacks Recieved</th>
+              <th className="border-0">Couriers</th>
               <th className="border-0">Notices</th>
-              <th className="border-0">Complaints Recieved</th>
+              <th className="border-0">Complaints</th>
               <th className="border-0">Bhawan</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <div className="d-flex no-block align-items-center">
-                  <div className="mr-2">
-                    <img
-                      src={img1}
-                      alt="user"
-                      className="rounded-circle"
-                      width="45"
-                    />
-                  </div>
-                  <div className="">
-                    <h5 className="mb-0 font-16 font-medium">Karan Kaul</h5>
-                    <span>karankaul@gmail.com</span>
-                  </div>
-                </div>
-              </td>
-              <td>1</td>
+            {admin.map((admin, index) => {
+              return (
+                <tr>
+                  <td>
+                    <div className="d-flex no-block align-items-center">
+                      <div className="mr-2">
+                        <img
+                          src={img1}
+                          alt="user"
+                          className="rounded-circle"
+                          width="45"
+                        />
+                      </div>
+                      <div className="">
+                        <h5 className="mb-0 font-16 font-medium">
+                          {admin.name}
+                        </h5>
+                        <span>{admin.email}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{courier[index]}</td>
 
-              <td>9</td>
-              <td className="blue-grey-text  text-darken-4 font-medium">4</td>
+                  <td>{notice}</td>
+                  <td className="blue-grey-text  text-darken-4 font-medium">
+                    {problem[index]}
+                  </td>
 
-              <td>Malaviya</td>
-            </tr>
-            <tr>
-              <td>
-                <div className="d-flex no-block align-items-center">
-                  <div className="mr-2">
-                    <img
-                      src={img2}
-                      alt="user"
-                      className="rounded-circle"
-                      width="45"
-                    />
-                  </div>
-                  <div className="">
-                    <h5 className="mb-0 font-16 font-medium">Pranay Piyush</h5>
-                    <span>pranaypiyush@gmail.com</span>
-                  </div>
-                </div>
-              </td>
-              <td>0</td>
-
-              <td>11</td>
-              <td className="blue-grey-text  text-darken-4 font-medium">6</td>
-
-              <td>Malaviya</td>
-            </tr>
-            <tr>
-              <td>
-                <div className="d-flex no-block align-items-center">
-                  <div className="mr-2">
-                    <img
-                      src={img3}
-                      alt="user"
-                      className="rounded-circle"
-                      width="45"
-                    />
-                  </div>
-                  <div className="">
-                    <h5 className="mb-0 font-16 font-medium">
-                      Vedansh Srivastava
-                    </h5>
-                    <span>vedanshsrivastava@gmail.com</span>
-                  </div>
-                </div>
-              </td>
-              <td>2</td>
-
-              <td>21</td>
-              <td className="blue-grey-text  text-darken-4 font-medium">13</td>
-              <td>Malaviya</td>
-            </tr>
-            <tr>
-              <td>
-                <div className="d-flex no-block align-items-center">
-                  <div className="mr-2">
-                    <img
-                      src={img4}
-                      alt="user"
-                      className="rounded-circle"
-                      width="45"
-                    />
-                  </div>
-                  <div className="">
-                    <h5 className="mb-0 font-16 font-medium">
-                      Vatsyayan Binay
-                    </h5>
-                    <span>vatsu@gmail.com</span>
-                  </div>
-                </div>
-              </td>
-              <td>2</td>
-
-              <td>15</td>
-              <td className="blue-grey-text  text-darken-4 font-medium">8</td>
-              <td>Malaviya</td>
-            </tr>
+                  <td>{admin.bhawan}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </Table>
       </CardBody>

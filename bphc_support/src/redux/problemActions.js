@@ -32,12 +32,16 @@ export const fetchProblems = () => {
       .catch((error) => console.log(error.message));
   };
 };
-export const fetchAllProblems = (bhawan) => {
+export const fetchAllProblems = () => {
   return (dispatch) => {
     axios
       .get(
         "https://bphcsupportapi.herokuapp.com/problem/admin/" +
-          JSON.parse(localStorage.getItem("profile")).result.studentBhawan,
+          JSON.parse(
+            localStorage.getItem("profile")
+          ).result.studentBhawan.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
+            letter.toUpperCase()
+          ),
         {
           headers: {
             authorization: localStorage.getItem("token"),
@@ -45,7 +49,6 @@ export const fetchAllProblems = (bhawan) => {
         }
       )
       .then((res) => {
-        // console.log(res);
         dispatch(fetchProblemsSuccess(res.data));
       })
       .catch((error) => console.log(error.message));

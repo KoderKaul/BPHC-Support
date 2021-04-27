@@ -14,11 +14,28 @@ import BookmarkIcon from "@material-ui/icons/Bookmark";
 import moment from "moment";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
+import axios from "axios";
+import { fetchAllProblems } from "../../../../redux/problemActions";
+import { useDispatch } from "react-redux";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     active: {
       color: "green",
+    },
+    passive: {
+      color: "red",
     },
     root: {
       maxWidth: 345,
@@ -43,12 +60,29 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-export default function Complaint({ problem }) {
+export default function Complaint({ problem, type }) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-
+  const [open, setOpen] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const dispatch = useDispatch;
+  const handleClose = (type) => {
+    const newproblem = { ...problem, problemStatus: "solved" };
+
+    if (type == "yes") {
+      axios.patch(
+        "https://bphcsupportapi.herokuapp.com/problem/" + problem._id,
+        newproblem,
+        { headers: { authorization: localStorage.getItem("token") } }
+      );
+    }
+    setOpen(false);
   };
 
   return (
@@ -100,14 +134,50 @@ export default function Complaint({ problem }) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>
+          <Typography
+            paragraph
+            onClick={() => {
+              if (type == "admin") handleClickOpen();
+            }}
+          >
             Status:{" "}
-            <b className={classes.active}>
+            <b
+              className={
+                problem.problemStatus == "pending"
+                  ? classes.passive
+                  : classes.active
+              }
+            >
               {problem.problemStatus.toUpperCase()}
             </b>
           </Typography>
         </CardContent>
       </Collapse>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">
+          {"Is the Problem Resolved?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Click "YES" if the problem is resolved
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => handleClose("no")} color="primary">
+            No
+          </Button>
+          <Button onClick={() => handleClose("yes")} color="primary">
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Card>
   );
 }

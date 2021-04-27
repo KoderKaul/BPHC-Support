@@ -10,6 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import FileBase from "react-file-base64";
 import useStyles from "../AddNotices/AddNotices.styles";
 import { postCourier } from "../../../redux/courierActions";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 function AddCourier({ currentId, setCurrentId }) {
   const states = useSelector((state) => state);
@@ -24,6 +30,20 @@ function AddCourier({ currentId, setCurrentId }) {
   });
   const dispatch = useDispatch();
   const classes = useStyles();
+
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const clear = () => {
     setPostData({
@@ -40,7 +60,7 @@ function AddCourier({ currentId, setCurrentId }) {
     console.log("clicked");
     e.preventDefault();
     dispatch(postCourier(postData));
-
+    handleClick();
     clear();
   };
 
@@ -65,12 +85,12 @@ function AddCourier({ currentId, setCurrentId }) {
             }
           />
           <TextField
-            name="StudentEmail"
+            name="studentEmail"
             variant="outlined"
             label="StudentEmail"
             fullWidth
             required={true}
-            value={postData.title}
+            value={postData.studentEmail}
             onChange={(e) =>
               setPostData({ ...postData, studentEmail: e.target.value })
             }
@@ -83,7 +103,7 @@ function AddCourier({ currentId, setCurrentId }) {
             multiline
             required={true}
             rows={4}
-            value={postData.message}
+            value={postData.courierDesc}
             onChange={(e) =>
               setPostData({ ...postData, courierDesc: e.target.value })
             }
@@ -128,6 +148,11 @@ function AddCourier({ currentId, setCurrentId }) {
             Clear
           </Button>
         </form>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success">
+            Courier Added
+          </Alert>
+        </Snackbar>
       </Paper>
     </Container>
   );

@@ -10,6 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import FileBase from "react-file-base64";
 import useStyles from "./AddNotices.styles";
 import { postNotice } from "../../../redux/noticeActions";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 function AddNotices() {
   const [postNoticeData, setPostNoticeData] = useState({
@@ -22,6 +28,20 @@ function AddNotices() {
   });
   const dispatch = useDispatch();
   const classes = useStyles();
+
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const clear = () => {
     setPostNoticeData({
@@ -38,6 +58,7 @@ function AddNotices() {
     e.preventDefault();
     console.log(postNoticeData);
     dispatch(postNotice(postNoticeData));
+    handleClick();
     clear();
   };
 
@@ -154,6 +175,11 @@ function AddNotices() {
             Clear
           </Button>
         </form>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success">
+            Notice Added!!
+          </Alert>
+        </Snackbar>
       </Paper>
     </Container>
   );

@@ -133,7 +133,7 @@ describe("Testing Student.js API\n", function () {
     it("patch the specific student route", function (done) {
       const em = "f20180425@hyderabad.bits-pilani.ac.in";
       const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1qdWFyYTBAdmltZW8uY29tIiwiaWF0IjoxNjE5MDc5MTA5LCJleHAiOjE2MzYzNTkxMDl9.JvIz0xQexomd6zjm2m5qJCFVb8e051aRge1kzKXGG20";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhaWtpYUBoeWRlcmFiYWQuYml0cy1waWxhbmkuYWMuaW4iLCJpYXQiOjE2MTkxOTU4NjAsImV4cCI6MTYyMTc4Nzg2MH0.KCnUwt61hxIuLL0yd-0U--68mkHwq4miP39rd46yK-k";
 
       chai
         .request(server)
@@ -175,7 +175,7 @@ describe("Testing notice.js API\n", function () {
   describe("****posting the  /", function () {
     it("adding notice", function (done) {
       const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1qdWFyYTBAdmltZW8uY29tIiwiaWF0IjoxNjE5MDc5MTA5LCJleHAiOjE2MzYzNTkxMDl9.JvIz0xQexomd6zjm2m5qJCFVb8e051aRge1kzKXGG20";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhaWtpYUBoeWRlcmFiYWQuYml0cy1waWxhbmkuYWMuaW4iLCJpYXQiOjE2MTkxOTU4NjAsImV4cCI6MTYyMTc4Nzg2MH0.KCnUwt61hxIuLL0yd-0U--68mkHwq4miP39rd46yK-k";
       chai
         .request(server)
         .post("/notice/") //post request in problem -1
@@ -206,7 +206,7 @@ describe("Testing notice.js API\n", function () {
   describe("get route  /user", function () {
     it("get notices", function (done) {
       const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1qdWFyYTBAdmltZW8uY29tIiwiaWF0IjoxNjE5MDc5MTA5LCJleHAiOjE2MzYzNTkxMDl9.JvIz0xQexomd6zjm2m5qJCFVb8e051aRge1kzKXGG20";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhaWtpYUBoeWRlcmFiYWQuYml0cy1waWxhbmkuYWMuaW4iLCJpYXQiOjE2MTkxOTU4NjAsImV4cCI6MTYyMTc4Nzg2MH0.KCnUwt61hxIuLL0yd-0U--68mkHwq4miP39rd46yK-k";
       chai
         .request(server)
         .get("/notice/user") //get request in problem -1
@@ -243,7 +243,7 @@ describe("Testing Problem.js API\n", function () {
   describe("posting the  /", function () {
     it("post problems", function (done) {
       const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1qdWFyYTBAdmltZW8uY29tIiwiaWF0IjoxNjE5MDc5MTA5LCJleHAiOjE2MzYzNTkxMDl9.JvIz0xQexomd6zjm2m5qJCFVb8e051aRge1kzKXGG20";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhaWtpYUBoeWRlcmFiYWQuYml0cy1waWxhbmkuYWMuaW4iLCJpYXQiOjE2MTkxOTU4NjAsImV4cCI6MTYyMTc4Nzg2MH0.KCnUwt61hxIuLL0yd-0U--68mkHwq4miP39rd46yK-k";
       chai
         .request(server)
         .post("/problem/") //post request in problem -1
@@ -274,7 +274,7 @@ describe("Testing Problem.js API\n", function () {
     it("checking the status of problems", function (done) {
       const email1 = "f20180305@hyderabad.bits-pilani.ac.in";
       const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1qdWFyYTBAdmltZW8uY29tIiwiaWF0IjoxNjE5MDc5MTA5LCJleHAiOjE2MzYzNTkxMDl9.JvIz0xQexomd6zjm2m5qJCFVb8e051aRge1kzKXGG20";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhaWtpYUBoeWRlcmFiYWQuYml0cy1waWxhbmkuYWMuaW4iLCJpYXQiOjE2MTkxOTU4NjAsImV4cCI6MTYyMTc4Nzg2MH0.KCnUwt61hxIuLL0yd-0U--68mkHwq4miP39rd46yK-k";
       chai
         .request(server)
         .get("/problem/user/" + email1) //get request in problem -1
@@ -306,7 +306,7 @@ describe("Testing Problem.js API\n", function () {
     it("get problem list for a bhawan", function (done) {
       const bhawan1 = "ram";
       const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1qdWFyYTBAdmltZW8uY29tIiwiaWF0IjoxNjE5MDc5MTA5LCJleHAiOjE2MzYzNTkxMDl9.JvIz0xQexomd6zjm2m5qJCFVb8e051aRge1kzKXGG20";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhaWtpYUBoeWRlcmFiYWQuYml0cy1waWxhbmkuYWMuaW4iLCJpYXQiOjE2MTkxOTU4NjAsImV4cCI6MTYyMTc4Nzg2MH0.KCnUwt61hxIuLL0yd-0U--68mkHwq4miP39rd46yK-k";
       chai
         .request(server)
         .get("/problem/user/" + bhawan1) //get request in problem -1
@@ -415,7 +415,7 @@ describe("Testing Courier.js API\n", function () {
   describe("posting the  /", function () {
     it("adding couriers", function (done) {
       const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1qdWFyYTBAdmltZW8uY29tIiwiaWF0IjoxNjE5MDc5MTA5LCJleHAiOjE2MzYzNTkxMDl9.JvIz0xQexomd6zjm2m5qJCFVb8e051aRge1kzKXGG20";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhaWtpYUBoeWRlcmFiYWQuYml0cy1waWxhbmkuYWMuaW4iLCJpYXQiOjE2MTkxOTU4NjAsImV4cCI6MTYyMTc4Nzg2MH0.KCnUwt61hxIuLL0yd-0U--68mkHwq4miP39rd46yK-k";
       chai
         .request(server)
         .post("/courier/") //post request in problem -1
@@ -431,7 +431,7 @@ describe("Testing Courier.js API\n", function () {
     it("checking the status of couriers", function (done) {
       const email1 = "f20180305@hyderabad.bits-pilani.ac.in";
       const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1qdWFyYTBAdmltZW8uY29tIiwiaWF0IjoxNjE5MDc5MTA5LCJleHAiOjE2MzYzNTkxMDl9.JvIz0xQexomd6zjm2m5qJCFVb8e051aRge1kzKXGG20";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhaWtpYUBoeWRlcmFiYWQuYml0cy1waWxhbmkuYWMuaW4iLCJpYXQiOjE2MTkxOTU4NjAsImV4cCI6MTYyMTc4Nzg2MH0.KCnUwt61hxIuLL0yd-0U--68mkHwq4miP39rd46yK-k";
       chai
         .request(server)
         .get("/courier/user/" + email1) //get request in problem -1
@@ -592,7 +592,7 @@ describe("Testing Admin.js API\n", function () {
     it("patch the specific admin route", function (done) {
       const em = "saikia@hyderabad.bits-pilani.ac.in";
       const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhaWtpYUBoeWRlcmFiYWQuYml0cy1waWxhbmkuYWMuaW4iLCJpYXQiOjE2MTkwMzI1OTEsImV4cCI6MTYxOTExODk5MX0.D4Ph3C4SdzaEKOaunJA2D54cIzQC1yEuv8J2q_djSNU";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhaWtpYUBoeWRlcmFiYWQuYml0cy1waWxhbmkuYWMuaW4iLCJpYXQiOjE2MTkxOTU4NjAsImV4cCI6MTYyMTc4Nzg2MH0.KCnUwt61hxIuLL0yd-0U--68mkHwq4miP39rd46yK-k";
 
       chai
         .request(server)

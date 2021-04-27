@@ -9,6 +9,12 @@ import { makeStyles, Paper } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import { useDispatch } from "react-redux";
 import { postProblem } from "../../../redux/problemActions";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -57,10 +63,23 @@ const hostels = [
   "Meera",
   "Malviya",
 ];
-const complaints = ["Room issue", "Hostel issue", "Mess issue", "Others"];
+const complaints = ["Room issue", "Hostel issue", "Others"];
 
 function Form() {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const [postComplaintData, setPostComplaintData] = useState({
     studentName: JSON.parse(localStorage.getItem("profile")).result.name,
@@ -87,6 +106,7 @@ function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    handleClick();
 
     dispatch(postProblem(postComplaintData));
     clear();
@@ -304,6 +324,11 @@ function Form() {
             Clear
           </Button>
         </form>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success">
+            Complaint Registered!!
+          </Alert>
+        </Snackbar>
       </Paper>
     </Container>
   );

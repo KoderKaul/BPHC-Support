@@ -35,11 +35,10 @@ const Complaints = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (props.type == "admin") {
-      console.log("hello");
       dispatch(fetchAllProblems());
     }
     if (props.type == "student") dispatch(fetchProblems());
-  }, []);
+  }, [problems]);
   return !problems.length ? (
     <CircularProgress />
   ) : (
@@ -62,7 +61,7 @@ const Complaints = (props) => {
               .filter((problem) => problem.problemStatus == "pending")
               .map((problem) => (
                 <Grid key={problem._id} item xs={12} sm={6} lg={4}>
-                  <Complaint problem={problem} />
+                  <Complaint type={props.type} problem={problem} />
                 </Grid>
               ))
           : ""}
